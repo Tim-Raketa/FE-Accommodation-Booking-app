@@ -1,0 +1,8 @@
+.bgimage{
+    background-image: url('../../photographs/wallpaper-room.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: grid;
+    margin: -8px;
+}

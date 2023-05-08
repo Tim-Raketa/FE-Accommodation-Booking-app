@@ -1,0 +1,45 @@
+<div class="bgimage">
+    <div class="wrapper">
+
+        <div class="title">
+            Login  
+        </div>
+        
+        <div class="form">
+          <form [formGroup]="loginUserForm">
+            
+            <div class="inputfield">
+              <label for="email">Email:</label>
+              <input type="text" placeholder="example@mail.com" formControlName="email" class="input">
+            </div>
+            <div class="inputfield">
+            <label></label>
+            <span style="color: red; font-size: medium; font: bold;" *ngIf="email && email.invalid && email.touched"> This email is invalid! </span>
+            </div>
+  
+            <div class="inputfield">
+              <label>Password:</label>
+              <input type="password" name="password" formControlName="password" placeholder="*********" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="password && password.invalid && password.touched"> This password is invalid! </span>
+            </div>
+  
+            <div class="inputfield">
+              <button [disabled]="loginUserForm.invalid" class="btn" (click)="login()">Login</button>
+            </div>
+  
+            <div class="inputfield">
+              <label>Don't have an account?</label>
+              <button class="btn" (click)="goToRegistration()"> Sign up </button>
+            </div>
+  
+            <div class="inputfield">
+              <button class="btn" (click)="goToHome()">Return to home</button>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+</div>
