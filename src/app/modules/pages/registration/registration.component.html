@@ -10,6 +10,10 @@
                 <label for="username">Username:</label>
                 <input type="text" name="username" formControlName="username" class="input">
             </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="username && username.invalid && username.touched"> This username is invalid! </span>
+            </div>
 
             <div class="inputfield">
               <label for="email">Email:</label>
@@ -57,9 +61,13 @@
             </div>
 
             <div class="inputfield">
-                <label for="username">Place of residence:</label>
-                <input type="text" name="username" formControlName="username" class="input">
-              </div>
+                <label for="residency">Place of residence:</label>
+                <input type="text" name="residency" formControlName="residency" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="residency && residency.invalid && residency.touched"> This residency is invalid! </span>
+            </div>
   
             <div class="inputfield">
               <button [disabled]="registerUserForm.invalid" class="btn" (click)="register()">Register</button>

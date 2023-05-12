@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-edit',
@@ -9,17 +10,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class UserEditComponent implements OnInit {
 
   registerUserForm = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     confirmPassword: new FormControl('', Validators.required),
     name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
     surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
-    jmbg: new FormControl('', [Validators.required, Validators.pattern('[0-9]{13}$')])
+    residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')])
   }, [])
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  get username(){
+    return this.registerUserForm.get('username');
   }
 
   get email(){
@@ -42,8 +48,12 @@ export class UserEditComponent implements OnInit {
     return this.registerUserForm.get('surname');
   }
 
-  get jmbg(){
-    return this.registerUserForm.get('jmbg');
+  get residency(){
+    return this.registerUserForm.get('residency');
   }
+
+  goToHome =  () => {
+    this.router.navigateByUrl('/host');
+  };
 
 }
