@@ -6,6 +6,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GuestHomeComponent } from './guest-home/guest-home.component';
 import { HostHomeComponent } from './host-home/host-home.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HostHomeComponent } from './host-home/host-home.component';
     RegistrationComponent,
     LoginComponent,
     GuestHomeComponent,
-    HostHomeComponent
+    HostHomeComponent,
+    UserEditComponent
   ]
 })
 export class PagesModule { }

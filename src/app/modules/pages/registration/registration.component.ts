@@ -10,15 +10,20 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
 
   registerUserForm = new FormGroup({
+      username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
       name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
       surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
-      jmbg: new FormControl('', [Validators.required, Validators.pattern('[0-9]{13}$')])
+      residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')])
     }, [])
 
   constructor(private router: Router) {}
+
+  get username(){
+    return this.registerUserForm.get('username');
+  }
 
   get email(){
     return this.registerUserForm.get('email');
@@ -40,8 +45,8 @@ export class RegistrationComponent implements OnInit {
     return this.registerUserForm.get('surname');
   }
 
-  get jmbg(){
-    return this.registerUserForm.get('jmbg');
+  get residency(){
+    return this.registerUserForm.get('residency');
   }
 
   ngOnInit() {}
@@ -51,7 +56,7 @@ export class RegistrationComponent implements OnInit {
   };
 
   goToHome =  () => {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/welcome');
   };
 
   register =  () => {};

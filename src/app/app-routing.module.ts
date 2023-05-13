@@ -5,6 +5,7 @@ import { LoginComponent } from './modules/pages/login/login.component';
 import { WelcomeComponent } from './modules/pages/welcome/welcome.component';
 import { GuestHomeComponent } from './modules/pages/guest-home/guest-home.component';
 import { HostHomeComponent } from './modules/pages/host-home/host-home.component';
+import { UserEditComponent } from './modules/pages/user-edit/user-edit.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'guest', component: GuestHomeComponent },
   { path: 'host', component: HostHomeComponent },
+  { path: 'edit', component: UserEditComponent },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
