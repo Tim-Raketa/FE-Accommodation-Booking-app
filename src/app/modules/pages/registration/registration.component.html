@@ -68,6 +68,14 @@
               <label></label>
               <span style="color: red; font-size: medium; font: bold;" *ngIf="residency && residency.invalid && residency.touched"> This residency is invalid! </span>
             </div>
+
+            <div class="inputfield">
+              <label for="type">Type of account:</label>
+                <input type="radio" id="host" name="type" formControlName="type" value="HOST" required>
+                <label for="host">HOST</label>
+                <input type="radio" id="guest" name="type" formControlName="type" value="GUEST">
+                <label for="guest">GUEST</label>
+           </div>
   
             <div class="inputfield">
               <button [disabled]="registerUserForm.invalid" class="btn" (click)="register()">Register</button>
