@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GuestHomeComponent } from './guest-home/guest-home.component';
 import { HostHomeComponent } from './host-home/host-home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   declarations: [
     WelcomeComponent,
