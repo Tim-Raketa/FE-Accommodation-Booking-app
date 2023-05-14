@@ -10,6 +10,7 @@ import { CreateAccommodationComponent } from './modules/pages/create-accommodati
 import { AuthorizationGuard } from './modules/pages/login/authorization.guard';
 import { RentableIntervalsViewComponent } from './modules/pages/rentable-intervals-view/rentable-intervals-view.component';
 import { CreateRentableIntervalComponent } from './modules/pages/create-rentable-interval/create-rentable-interval.component';
+import { GuestReservationsComponent } from './modules/pages/guest-reservations/guest-reservations.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     data: { allowedRoles: ['GUEST'] },
     canActivate: [AuthorizationGuard]
   },
+  { path: 'reservations', component: GuestReservationsComponent },
   { 
     path: 'host', component: HostHomeComponent,
     //data: { allowedRoles: ['HOST'] },

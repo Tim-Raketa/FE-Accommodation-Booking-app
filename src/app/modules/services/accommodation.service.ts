@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AccommodationDTO } from '../model/accommodation-dto.model';
 import { Observable } from 'rxjs';
 import { RentableIntervalDTO } from '../model/rentable-interval-dto.model';
+import { ReservationIdsDTO } from '../model/reservationIdsDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class AccommodationService {
 
   createRentableInterval(rentableInterval: RentableIntervalDTO): Observable<RentableIntervalDTO>{
     return this.http.post<RentableIntervalDTO>(this.route + 'accommodations/createRentableInterval', rentableInterval, {headers: this.headers});
+  }
+
+  getGuestReservations(username: string): Observable<ReservationIdsDTO[]>{
+    return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/accept/username=' + username , {headers: this.headers});
   }
   
 }

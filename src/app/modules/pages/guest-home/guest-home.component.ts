@@ -21,5 +21,9 @@ export class GuestHomeComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  reservations =  () => {
+    this.router.navigateByUrl('/reservations');
+  };
   
 }
