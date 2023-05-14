@@ -8,20 +8,20 @@
             
             <div class="inputfield">
                 <label for="startTime">Start Time:</label>
-                <input type="text" name="startTime" formControlName="startTime" class="input">
+                <input type="date" name="startTime" formControlName="startTime" class="input">
             </div>
             <div class="inputfield">
               <label></label>
-              <span style="color: red; font-size: medium; font: bold;" *ngIf="startTime && startTime.invalid && startTime.touched"> This word is invalid! </span>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="startTime && startTime.invalid && startTime.touched"> This date is invalid! </span>
             </div>
 
             <div class="inputfield">
                 <label for="endTime">End Time:</label>
-                <input type="text" name="endTime" formControlName="endTime" class="input">
+                <input type="date" name="endTime" formControlName="endTime" class="input">
             </div>
             <div class="inputfield">
               <label></label>
-              <span style="color: red; font-size: medium; font: bold;" *ngIf="endTime && endTime.invalid && endTime.touched"> This word is invalid! </span>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="endTime && endTime.invalid && endTime.touched"> This date is invalid! </span>
             </div>
 
             <div class="inputfield">
@@ -49,6 +49,8 @@
                   <input type="radio" id="false" name="automaticAcceptance" formControlName="automaticAcceptance" value="false">
                   <label for="false">false</label>
             </div>
+
+            <div style="color: red; font-size: medium; font: bold;" *ngIf="error.isError">{{error.errorMessage}}</div>
   
             <div class="inputfield">
               <button [disabled]="createRentableIntervalForm.invalid" class="btn" (click)="createRentableInterval()">Submit</button>
