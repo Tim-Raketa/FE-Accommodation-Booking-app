@@ -7,11 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GuestHomeComponent } from './guest-home/guest-home.component';
 import { HostHomeComponent } from './host-home/host-home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   declarations: [
     WelcomeComponent,
@@ -19,7 +22,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     LoginComponent,
     GuestHomeComponent,
     HostHomeComponent,
-    UserEditComponent
+    UserEditComponent,
+    CreateAccommodationComponent
   ]
 })
 export class PagesModule { }
