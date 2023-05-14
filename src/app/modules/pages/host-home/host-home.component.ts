@@ -13,7 +13,7 @@ import { AccommodationService } from '../../services/accommodation.service';
 export class HostHomeComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<AccommodationDTO>();
-  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests'];
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals'];
   public accommodations: AccommodationDTO[] = [];
 
   constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
@@ -27,6 +27,12 @@ export class HostHomeComponent implements OnInit {
 
   public addAccommodation() {
     this.router.navigate(['/host/createAccommodation']);
+  }
+
+  public viewIntervals(accommodationId: number){
+    //this.router.navigate(['facilityAdmin', this.facilityAdminId, 'user', this.registeredUserId, 'appointment', appointment.id]);
+    this.router.navigate(['host/accommodation', accommodationId]);
+
   }
 
   editProfile =  () => {

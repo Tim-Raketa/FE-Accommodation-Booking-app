@@ -1,0 +1,65 @@
+<div class="bgimage">
+    <div class="wrapper">
+        <div class="title">
+            Add Rentable Interval 
+        </div>
+        <div class="form">
+          <form [formGroup]="createRentableIntervalForm">
+            
+            <div class="inputfield">
+                <label for="startTime">Start Time:</label>
+                <input type="text" name="startTime" formControlName="startTime" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="startTime && startTime.invalid && startTime.touched"> This word is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="endTime">End Time:</label>
+                <input type="text" name="endTime" formControlName="endTime" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="endTime && endTime.invalid && endTime.touched"> This word is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="priceOfAccommodation">Price Of Accommodation:</label>
+                <input type="text" name="priceOfAccommodation" formControlName="priceOfAccommodation" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="priceOfAccommodation && priceOfAccommodation.invalid && priceOfAccommodation.touched"> This number is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="pricePerGuest">Price Per Guest:</label>
+                <input type="text" name="pricePerGuest" formControlName="pricePerGuest" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="pricePerGuest && pricePerGuest.invalid && pricePerGuest.touched"> This number is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="automaticAcceptance">Automatic Acceptance:</label>
+                  <input type="radio" id="true" name="automaticAcceptance" formControlName="automaticAcceptance" value="true" required>
+                  <label for="true">true</label>
+                  <input type="radio" id="false" name="automaticAcceptance" formControlName="automaticAcceptance" value="false">
+                  <label for="false">false</label>
+            </div>
+  
+            <div class="inputfield">
+              <button [disabled]="createRentableIntervalForm.invalid" class="btn" (click)="createRentableInterval()">Submit</button>
+            </div>
+          </form>
+          <br>
+          
+          <div class="inputfield">
+            <button class="btn" (click)="goBack()">Cancel</button>
+          </div>
+        </div>
+      </div>
+</div>
+
