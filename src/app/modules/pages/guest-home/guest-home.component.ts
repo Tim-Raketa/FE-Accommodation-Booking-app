@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
 
 @Component({
   selector: 'app-guest-home',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class GuestHomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -16,5 +17,9 @@ export class GuestHomeComponent implements OnInit {
   editProfile =  () => {
     this.router.navigateByUrl('/edit');
   };
+
+  logout() {
+    this.authService.logout();
+  }
   
 }

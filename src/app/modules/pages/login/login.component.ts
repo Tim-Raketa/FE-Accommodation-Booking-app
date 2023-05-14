@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, catchError } from 'rxjs';
 import { Login } from '../../model/login';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +13,16 @@ import { Login } from '../../model/login';
 export class LoginComponent implements OnInit {
 
     loginUserForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     })
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService : AuthService) { }
 
   ngOnInit()  {}
 
-  get email(){
-    return this.loginUserForm.get('email');
+  get username(){
+    return this.loginUserForm.get('username');
   }
 
   get password(){
@@ -33,10 +34,32 @@ export class LoginComponent implements OnInit {
   };
 
   goToHome =  () => {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/welcome');
   };
   
   public loginDTO: Login = new Login();
   
-  login(){}
+  login(){
+    this.loginDTO.username = this.loginUserForm.get("username")?.value as string
+    this.loginDTO.password = this.loginUserForm.get("password")?.value as unknown as string
+    console.log(this.loginDTO)
+    this.authService.login(this.loginDTO).subscribe(res => {
+
+      let accessToken = res.accessToken
+      let role = res.role
+      if(accessToken == ''){
+        alert("Wrong email or password!") 
+      } else {
+        localStorage.setItem('token', accessToken);
+        localStorage.setItem('role', role);
+  
+        if (role == 'HOST') this.router.navigate(['/host']);
+        else if (role == 'GUEST') this.router.navigate(['/guest']);
+        else {
+             localStorage.removeItem('token');
+             this.router.navigate(['/']);
+           }
+      }
+      });
+  }
 }

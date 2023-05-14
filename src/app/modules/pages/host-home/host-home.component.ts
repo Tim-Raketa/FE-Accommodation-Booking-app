@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
 import { AccommodationDTO } from '../../model/accommodation-dto.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccommodationService } from '../../services/accommodation.service';
@@ -15,8 +16,7 @@ export class HostHomeComponent implements OnInit {
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests'];
   public accommodations: AccommodationDTO[] = [];
 
-
-  constructor(private router: Router, private accommodationService: AccommodationService) { }
+  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
   ngOnInit() {
    this.accommodationService.getAccommodations().subscribe(res =>{
@@ -32,5 +32,9 @@ export class HostHomeComponent implements OnInit {
   editProfile =  () => {
     this.router.navigateByUrl('/edit');
   };
+
+  logout() {
+    this.authService.logout();
+  }
 
 }
