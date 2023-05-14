@@ -9,21 +9,21 @@
           <form [formGroup]="loginUserForm">
             
             <div class="inputfield">
-              <label for="email">Email:</label>
-              <input type="text" placeholder="example@mail.com" formControlName="email" class="input">
+              <label for="username">Username:</label>
+              <input type="text" formControlName="username" class="input">
             </div>
             <div class="inputfield">
             <label></label>
-            <span style="color: red; font-size: medium; font: bold;" *ngIf="email && email.invalid && email.touched"> This email is invalid! </span>
+            <span style="color: red; font-size: medium; font: bold;" *ngIf="username && username.invalid && username.touched"> Username is required! </span>
             </div>
   
             <div class="inputfield">
               <label>Password:</label>
-              <input type="password" name="password" formControlName="password" placeholder="*********" class="input">
+              <input type="password" name="password" formControlName="password" class="input">
             </div>
             <div class="inputfield">
               <label></label>
-              <span style="color: red; font-size: medium; font: bold;" *ngIf="password && password.invalid && password.touched"> This password is invalid! </span>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="password && password.invalid && password.touched"> Password is required! </span>
             </div>
   
             <div class="inputfield">
