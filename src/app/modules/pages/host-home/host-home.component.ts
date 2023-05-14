@@ -26,7 +26,7 @@ export class HostHomeComponent implements OnInit {
   }
 
   public addAccommodation() {
-    //this.router.navigate(['/administrator/createFlight']);
+    this.router.navigate(['/host/createAccommodation']);
   }
 
   editProfile =  () => {

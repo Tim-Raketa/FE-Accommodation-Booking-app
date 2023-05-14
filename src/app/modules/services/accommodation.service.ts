@@ -16,5 +16,9 @@ export class AccommodationService {
   getAccommodations(): Observable<AccommodationDTO[]>{
     return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/', {headers: this.headers});
   }
+
+  createAccommodation(accommodation: AccommodationDTO): Observable<AccommodationDTO>{
+    return this.http.post<AccommodationDTO>(this.route + 'accommodations/', accommodation, {headers: this.headers});
+  }
   
 }
