@@ -12,12 +12,14 @@ import { RentableIntervalDTO } from '../../model/rentable-interval-dto.model';
 export class CreateRentableIntervalComponent implements OnInit {
 
   accommodationID: any
+  priceOfAccommodation: any
+  pricePerGuest: any
 
   createRentableIntervalForm = new FormGroup({
     startTime: new FormControl('', Validators.required),
     endTime: new FormControl('', Validators.required),
-    priceOfAccommodation: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
-    pricePerGuest: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
+    typeOfPrice: new FormControl('', Validators.required),
+    price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
     automaticAcceptance: new FormControl('', Validators.required),
   })
 
@@ -34,12 +36,12 @@ export class CreateRentableIntervalComponent implements OnInit {
     return this.createRentableIntervalForm.get('endTime');
   }
 
-  get priceOfAccommodation() {
-    return this.createRentableIntervalForm.get('priceOfAccommodation');
+  get typeOfPrice(){
+    return this.createRentableIntervalForm.get('typeOfPrice');
   }
 
-  get pricePerGuest() {
-    return this.createRentableIntervalForm.get('pricePerGuest');
+  get price(){
+    return this.createRentableIntervalForm.get('price');
   }
 
   get automaticAcceptance() {
@@ -70,8 +72,16 @@ export class CreateRentableIntervalComponent implements OnInit {
 
     this.isValidDate = this.validateDates(start, end);
 
-    let priceOfAccommodation = this.createRentableIntervalForm.get("priceOfAccommodation")?.value
-    let pricePerGuest = this.createRentableIntervalForm.get("pricePerGuest")?.value
+    let typeOfPrice = this.createRentableIntervalForm.get("typeOfPrice")?.value
+
+    if(typeOfPrice === 'forAccommodation'){
+      this.priceOfAccommodation = this.createRentableIntervalForm.get("price")?.value
+      this.pricePerGuest = 0;
+    } else{
+      this.priceOfAccommodation = 0;
+      this.pricePerGuest = this.createRentableIntervalForm.get("price")?.value;
+    }
+
     let automaticAcceptance = this.createRentableIntervalForm.get("automaticAcceptance")?.value === 'true' ? true : false
 
     let rentableInterval: RentableIntervalDTO = {
@@ -79,8 +89,8 @@ export class CreateRentableIntervalComponent implements OnInit {
       accommodationId: this.accommodationID,
       startTime: startTime ? startTime : '',
       endTime: endTime ? endTime : '',
-      priceOfAccommodation: Number(priceOfAccommodation),
-      pricePerGuest: Number(pricePerGuest),
+      priceOfAccommodation: Number(this.priceOfAccommodation),
+      pricePerGuest: Number(this.pricePerGuest),
       automaticAcceptance: automaticAcceptance
     }
 
