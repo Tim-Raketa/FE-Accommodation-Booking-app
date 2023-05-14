@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AccommodationDTO } from '../model/accommodation-dto.model';
 import { Observable } from 'rxjs';
+import { RentableIntervalDTO } from '../model/rentable-interval-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class AccommodationService {
 
   createAccommodation(accommodation: AccommodationDTO): Observable<AccommodationDTO>{
     return this.http.post<AccommodationDTO>(this.route + 'accommodations/', accommodation, {headers: this.headers});
+  }
+
+  getRentableIntervalsByAccommodationId(accommodationId: number): Observable<RentableIntervalDTO[]>{
+    return this.http.get<RentableIntervalDTO[]>(this.route + 'accommodations/rentableIntervals/accommodationId=' + accommodationId, {headers: this.headers});
   }
   
 }

@@ -31,6 +31,15 @@
                 <th mat-header-cell *matHeaderCellDef class="cell-center"> Max Guests </th>
                 <td mat-cell *matCellDef="let accommodation" class="cell-center">{{accommodation.maxGuests}}</td>
             </ng-container>
+
+            <ng-container matColumnDef="viewIntervals">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"></th>
+                <td mat-cell *matCellDef="let accommodation" class="cell-center">
+                    <button mat-icon-button (click)="viewIntervals(accommodation.id)">
+                        <mat-icon matTooltip="View Rentable Intervals">+</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

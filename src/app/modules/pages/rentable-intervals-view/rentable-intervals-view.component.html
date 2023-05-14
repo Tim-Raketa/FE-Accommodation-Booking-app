@@ -1,0 +1,39 @@
+<div class="bgimage">
+    <div>
+        <button class="btn" (click)="editProfile()"> Edit Profile </button>
+        <button class="btn" (click)="logout()"> Logout </button>
+    </div>
+    <div class="container">
+        <div class="table-header">
+            <p class="table-title">Rentable Intervals</p>
+            <button class="add-button" mat-mini-fab matTooltip="New Interval" matTooltipPosition="right" (click)="addInterval()">
+                <mat-icon>+</mat-icon>
+            </button>
+        </div>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="startTime">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Start Time </th>
+                <td mat-cell *matCellDef="let rentableInterval" class="cell-center">{{rentableInterval.startTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="endTime">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> End Time </th>
+                <td mat-cell *matCellDef="let rentableInterval" class="cell-center">{{rentableInterval.endTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="priceOfAccommodation">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Price Of Accommodation </th>
+                <td mat-cell *matCellDef="let rentableInterval" class="cell-center">{{rentableInterval.priceOfAccommodation}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pricePerGuest">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Price Per Guest </th>
+                <td mat-cell *matCellDef="let rentableInterval" class="cell-center">{{rentableInterval.pricePerGuest}}</td>
+            </ng-container>
+            <ng-container matColumnDef="automaticAcceptance">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Automatic Acceptance </th>
+                <td mat-cell *matCellDef="let rentableInterval" class="cell-center">{{rentableInterval.automaticAcceptance}}</td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

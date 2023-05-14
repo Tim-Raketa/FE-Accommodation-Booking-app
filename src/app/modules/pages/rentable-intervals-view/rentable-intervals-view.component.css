@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+.bgimage{
+    background-image: url('../../photographs/wallpaper-room.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: grid;
+    margin: -8px;
+}
+
+.btn{
+    padding: 8px 10px;
+    font-size: 15px; 
+    border: 0px;
+    background:  #85540b;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .container {
+    width: 75%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: #DCD6CC 1px solid;
+    background-color: white;
+    background: rgba(255,255,255,0.4);
+}
+
+table {
+    width: 100%;
+}
+
+.table-title {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+
+}
+
+.cell-center {
+    text-align: center;
+}
+
+.clickable:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-button {
+    margin: 10px 20px 10px 10px;
+    color: black;
+    background-color: #edece5;
+    float: right;
+}
+
+.table-header {
+    display: flex;
+}
+
+p {
+    float: left;
+    margin-right: auto;
+}

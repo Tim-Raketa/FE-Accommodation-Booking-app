@@ -9,6 +9,7 @@ import { HostHomeComponent } from './host-home/host-home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import { RentableIntervalsViewComponent } from './rentable-intervals-view/rentable-intervals-view.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     GuestHomeComponent,
     HostHomeComponent,
     UserEditComponent,
-    CreateAccommodationComponent
+    CreateAccommodationComponent,
+    RentableIntervalsViewComponent
   ]
 })
 export class PagesModule { }
