@@ -7,15 +7,32 @@ import { GuestHomeComponent } from './modules/pages/guest-home/guest-home.compon
 import { HostHomeComponent } from './modules/pages/host-home/host-home.component';
 import { UserEditComponent } from './modules/pages/user-edit/user-edit.component';
 import { CreateAccommodationComponent } from './modules/pages/create-accommodation/create-accommodation.component';
+import { AuthorizationGuard } from './modules/pages/login/authorization.guard';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'guest', component: GuestHomeComponent },
-  { path: 'host', component: HostHomeComponent },
-  { path: 'host/createAccommodation', component: CreateAccommodationComponent },
-  { path: 'edit', component: UserEditComponent },
+  { 
+    path: 'guest', component: GuestHomeComponent,
+    data: { allowedRoles: ['GUEST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  { 
+    path: 'host', component: HostHomeComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'host/createAccommodation', component: CreateAccommodationComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  { 
+    path: 'edit', component: UserEditComponent,
+    data: { allowedRoles: ['HOST', 'GUEST'] } ,
+    canActivate: [AuthorizationGuard]
+  },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 ];
 
