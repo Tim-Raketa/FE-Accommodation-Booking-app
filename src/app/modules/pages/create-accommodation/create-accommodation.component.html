@@ -1,0 +1,65 @@
+<div class="bgimage">
+    <div class="wrapper">
+        <div class="title">
+            Add Accommodation 
+        </div>
+        <div class="form">
+          <form [formGroup]="createAccommodationForm">
+            
+            <div class="inputfield">
+                <label for="name">Name:</label>
+                <input type="text" name="name" formControlName="name" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="name && name.invalid && name.touched"> This word is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="location">Location:</label>
+                <input type="text" name="location" formControlName="location" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="location && location.invalid && location.touched"> This word is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="perks">Perks:</label>
+                <input type="text" name="perks" formControlName="perks" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="perks && perks.invalid && perks.touched"> This word is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="minGuests">Min Guests:</label>
+                <input type="text" name="minGuests" formControlName="minGuests" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="minGuests && minGuests.invalid && minGuests.touched"> This number is invalid! </span>
+            </div>
+
+            <div class="inputfield">
+                <label for="maxGuests">Max Guests:</label>
+                <input type="text" name="maxGuests" formControlName="maxGuests" class="input">
+            </div>
+            <div class="inputfield">
+              <label></label>
+              <span style="color: red; font-size: medium; font: bold;" *ngIf="maxGuests && maxGuests.invalid && maxGuests.touched"> This number is invalid! </span>
+            </div>
+  
+            <div class="inputfield">
+              <button [disabled]="createAccommodationForm.invalid" class="btn" (click)="createAccommodation()">Submit</button>
+            </div>
+          </form>
+          <br>
+          
+          <div class="inputfield">
+            <button class="btn" (click)="goBack()">Cancel</button>
+          </div>
+        </div>
+      </div>
+</div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../login/auth.service';
+import { AccommodationDTO } from '../../model/accommodation-dto.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { AccommodationService } from '../../services/accommodation.service';
 
 @Component({
   selector: 'app-host-home',
@@ -9,9 +12,21 @@ import { AuthService } from '../login/auth.service';
 })
 export class HostHomeComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  public dataSource = new MatTableDataSource<AccommodationDTO>();
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests'];
+  public accommodations: AccommodationDTO[] = [];
+
+  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
   ngOnInit() {
+   this.accommodationService.getAccommodations().subscribe(res =>{
+    this.accommodations = res;
+    this.dataSource.data = res;
+   })
+  }
+
+  public addAccommodation() {
+    this.router.navigate(['/host/createAccommodation']);
   }
 
   editProfile =  () => {
