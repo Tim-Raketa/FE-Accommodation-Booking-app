@@ -30,7 +30,7 @@ export class RentableIntervalsViewComponent implements OnInit {
   }
 
   public addInterval() {
-    //this.router.navigate(['/host/createAccommodation']);
+    this.router.navigate(['host/accommodation', this.accommodationId, 'createRentableInterval']);
   }
 
   editProfile =  () => {

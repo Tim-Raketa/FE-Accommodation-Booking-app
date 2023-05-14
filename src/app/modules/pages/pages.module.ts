@@ -10,6 +10,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { RentableIntervalsViewComponent } from './rentable-intervals-view/rentable-intervals-view.component';
+import { CreateRentableIntervalComponent } from './create-rentable-interval/create-rentable-interval.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { RentableIntervalsViewComponent } from './rentable-intervals-view/rentab
     HostHomeComponent,
     UserEditComponent,
     CreateAccommodationComponent,
-    RentableIntervalsViewComponent
+    RentableIntervalsViewComponent,
+    CreateRentableIntervalComponent
   ]
 })
 export class PagesModule { }

@@ -25,5 +25,9 @@ export class AccommodationService {
   getRentableIntervalsByAccommodationId(accommodationId: number): Observable<RentableIntervalDTO[]>{
     return this.http.get<RentableIntervalDTO[]>(this.route + 'accommodations/rentableIntervals/accommodationId=' + accommodationId, {headers: this.headers});
   }
+
+  createRentableInterval(rentableInterval: RentableIntervalDTO): Observable<RentableIntervalDTO>{
+    return this.http.post<RentableIntervalDTO>(this.route + 'accommodations/createRentableInterval', rentableInterval, {headers: this.headers});
+  }
   
 }

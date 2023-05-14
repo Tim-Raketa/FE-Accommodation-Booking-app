@@ -9,6 +9,7 @@ import { UserEditComponent } from './modules/pages/user-edit/user-edit.component
 import { CreateAccommodationComponent } from './modules/pages/create-accommodation/create-accommodation.component';
 import { AuthorizationGuard } from './modules/pages/login/authorization.guard';
 import { RentableIntervalsViewComponent } from './modules/pages/rentable-intervals-view/rentable-intervals-view.component';
+import { CreateRentableIntervalComponent } from './modules/pages/create-rentable-interval/create-rentable-interval.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -26,6 +27,11 @@ const routes: Routes = [
   },
   {
     path: 'host/accommodation/:id', component: RentableIntervalsViewComponent,
+    //data: { allowedRoles: ['HOST'] },
+    //canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'host/accommodation/:id/createRentableInterval', component: CreateRentableIntervalComponent,
     //data: { allowedRoles: ['HOST'] },
     //canActivate: [AuthorizationGuard]
   },
