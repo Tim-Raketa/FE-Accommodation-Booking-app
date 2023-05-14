@@ -4,7 +4,7 @@
           Edit  
       </div>
       <div class="form">
-        <form [formGroup]="registerUserForm">
+        <form [formGroup]="editUserForm">
           
           <div class="inputfield">
               <label for="username">Username:</label>
@@ -39,7 +39,7 @@
           </div>
           <div class="inputfield">
             <label></label>
-            <span style="color: red; font-size: medium; font: bold;" *ngIf="registerUserForm.errors?.['passwordMismatchError']"> Password doesn't match! </span>
+            <span style="color: red; font-size: medium; font: bold;" *ngIf="editUserForm.errors?.['passwordMismatchError']"> Password doesn't match! </span>
           </div>
 
           <div class="inputfield">

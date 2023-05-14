@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserEditComponent implements OnInit {
 
-  registerUserForm = new FormGroup({
+  editUserForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -25,35 +25,40 @@ export class UserEditComponent implements OnInit {
   }
 
   get username(){
-    return this.registerUserForm.get('username');
+    return this.editUserForm.get('username');
   }
 
   get email(){
-    return this.registerUserForm.get('email');
+    return this.editUserForm.get('email');
   }
 
   get password(){
-    return this.registerUserForm.get('password');
+    return this.editUserForm.get('password');
   }
 
   get confirmPassword(){
-    return this.registerUserForm.get('confirmPassword');
+    return this.editUserForm.get('confirmPassword');
   }
 
   get name(){
-    return this.registerUserForm.get('name');
+    return this.editUserForm.get('name');
   }
 
   get surname(){
-    return this.registerUserForm.get('surname');
+    return this.editUserForm.get('surname');
   }
 
   get residency(){
-    return this.registerUserForm.get('residency');
+    return this.editUserForm.get('residency');
   }
 
   goToHome =  () => {
-    this.router.navigateByUrl('/host');
+    if(localStorage.getItem('role') == "HOST"){
+      this.router.navigateByUrl('/host');
+    } else if (localStorage.getItem('role') == "GUEST"){
+      this.router.navigateByUrl('/guest');
+    }
+    
   };
 
 }
