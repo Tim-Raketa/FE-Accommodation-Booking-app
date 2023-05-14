@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
+import { registerUserDTO } from '../../model/registerUserDTO';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,9 +21,19 @@ export class UserEditComponent implements OnInit {
     residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')])
   }, [])
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService : AuthService) { }
 
   ngOnInit() {
+    this.authService.getLoggedInUser().subscribe(res => {
+      this.editUserForm.patchValue({
+        username: res.username,
+        password: res.password,
+        name: res.name,
+        surname: res.surname,
+        email: res.email,
+        residency: res.residency
+      })
+    })
   }
 
   get username(){
