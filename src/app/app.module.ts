@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './modules/pages/pages.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table';  
+
 
 @NgModule({
   declarations: [
@@ -15,8 +16,8 @@ import { MatTableModule } from '@angular/material/table'
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
