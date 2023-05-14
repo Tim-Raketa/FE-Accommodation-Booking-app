@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Login } from '../../model/login';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { registerUserDTO } from '../../model/registerUserDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ login(login:Login): Observable<any> {
   return this.http.post<Login>(this.apiHost + '/users/login', login);
 }
 
-/*getLoggedInUser():Observable<any>{
-  return this.http.get<void>(this.apiHost + '/auth/loggedInUser', { headers: this.headers });
-}*/
+getLoggedInUser(): Observable<any>{
+  return this.http.get<any>(this.apiHost + '/users/getUser/' + localStorage.getItem("token"));
+}
 
 isAuthorized(allowedRoles: string[]): boolean {
   // check if the list of allowed roles is empty, if empty, authorize the user to access the page

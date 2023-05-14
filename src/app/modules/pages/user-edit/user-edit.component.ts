@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
+import { registerUserDTO } from '../../model/registerUserDTO';
+import { passwordMatch } from '../../custom-validators/passwordMatch';
+import { editUserDTO } from '../../model/editUserDTO';
+import { UserEditService } from './user-edit.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -17,11 +22,22 @@ export class UserEditComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
     surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
     residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')])
-  }, [])
+  }, [passwordMatch("password", "confirmPassword")])
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService : AuthService, private service: UserEditService) { }
 
   ngOnInit() {
+    this.authService.getLoggedInUser().subscribe(res => {
+      this.editUserForm.patchValue({
+        username: res.username,
+        password: res.password,
+        confirmPassword: res.password,
+        name: res.name,
+        surname: res.surname,
+        email: res.email,
+        residency: res.residency
+      })
+    })
   }
 
   get username(){
@@ -61,4 +77,39 @@ export class UserEditComponent implements OnInit {
     
   };
 
+  editUser =  () => {
+    let username = this.editUserForm.get("username")?.value
+    let password = this.editUserForm.get("password")?.value
+    let name = this.editUserForm.get("name")?.value
+    let surname = this.editUserForm.get("surname")?.value
+    let email = this.editUserForm.get("email")?.value
+    let residency = this.editUserForm.get("residency")?.value
+    let type = localStorage.getItem("role");
+    let oldUsername = localStorage.getItem("token");
+    let user: editUserDTO = {
+      username: username ? username : '',
+      password: password ? password : '',
+      name: name ? name : '',
+      surname: surname ? surname : '',
+      email: email ? email : '',
+      residency: residency ? residency : '',
+      type: type ? type : '',
+      oldUsername: oldUsername ? oldUsername : ''
+    }
+    console.log(user);
+    this.service.editUser(user).subscribe(res => {
+      console.log(res);
+      if (res.accessToken === '') {
+      alert("Username already exists. Try another.");
+      } else {
+      alert("Successfully edited your profile.");
+      localStorage.setItem("token", user.username);
+      this.goToHome();
+      }
+    }, error => 
+    {
+      console.log(error)
+    })
+
+  };
 }

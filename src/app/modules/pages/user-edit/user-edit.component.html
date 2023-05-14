@@ -70,7 +70,7 @@
           </div>
 
           <div class="inputfield">
-            <button class="btn">Save changes</button>
+            <button class="btn" [disabled]="editUserForm.pristine || editUserForm.invalid" (click)="editUser()">Save changes</button>
           </div>
 
           <div class="inputfield">
