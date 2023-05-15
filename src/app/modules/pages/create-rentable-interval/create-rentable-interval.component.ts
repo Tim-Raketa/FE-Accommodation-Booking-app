@@ -100,7 +100,12 @@ export class CreateRentableIntervalComponent implements OnInit {
     if(this.isValidDate){
       this.accommodationService.createRentableInterval(rentableInterval).subscribe(res =>{
         console.log(res);
-        this.router.navigate(['host/accommodation', this.accommodationID]);
+        if(res.id === 0){
+          alert("Cannot create because interval is overlaping with other intervals!")
+        } else{
+          this.router.navigate(['host/accommodation', this.accommodationID]);
+        }
+        
         }, error => 
         {
           console.log(error)

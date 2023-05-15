@@ -132,16 +132,18 @@ export class UpdateRentableIntervalComponent implements OnInit{
     if(this.isValidDate){
       this.accommodationService.updateRentableInterval(rentableInterval).subscribe(res =>{
         console.log(res);
-        this.router.navigate(['host/accommodation', this.accommodationID]);
+        if(res.id === 0){
+          alert("Cannot update because interval is occupied or overlaping with other intervals!")
+        } else{
+          this.router.navigate(['host/accommodation', this.accommodationID]);
+        }
+        
         }, error => 
         {
           console.log(error)
         }
       );
     }
-
-    
-
   };
 
   validateDates(sDate: Date, eDate: Date){
