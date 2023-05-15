@@ -24,23 +24,23 @@ const routes: Routes = [
   { path: 'reservations', component: GuestReservationsComponent },
   { 
     path: 'host', component: HostHomeComponent,
-    //data: { allowedRoles: ['HOST'] },
-    //canActivate: [AuthorizationGuard]
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'host/accommodation/:id', component: RentableIntervalsViewComponent,
-    //data: { allowedRoles: ['HOST'] },
-    //canActivate: [AuthorizationGuard]
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'host/accommodation/:id/createRentableInterval', component: CreateRentableIntervalComponent,
-    //data: { allowedRoles: ['HOST'] },
-    //canActivate: [AuthorizationGuard]
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'host/createAccommodation', component: CreateAccommodationComponent,
-    //data: { allowedRoles: ['HOST'] },
-    //canActivate: [AuthorizationGuard]
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
   },
   { 
     path: 'edit', component: UserEditComponent,

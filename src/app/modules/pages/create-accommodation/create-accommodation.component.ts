@@ -11,6 +11,8 @@ import { AccommodationDTO } from '../../model/accommodation-dto.model';
 })
 export class CreateAccommodationComponent implements OnInit{
 
+  hostId: any
+
   createAccommodationForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]),
     location: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]),
@@ -42,6 +44,7 @@ export class CreateAccommodationComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.hostId = localStorage.getItem("token");
   }
 
   goBack =  () => {
@@ -63,6 +66,7 @@ export class CreateAccommodationComponent implements OnInit{
       perks: perks ? perks : '',
       minGuests: Number(minGuests),
       maxGuests: Number(maxGuests),
+      hostId: this.hostId,
     }
 
     console.log(accommodation);

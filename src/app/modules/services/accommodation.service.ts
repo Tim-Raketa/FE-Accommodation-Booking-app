@@ -34,5 +34,9 @@ export class AccommodationService {
   getGuestReservations(username: string): Observable<ReservationIdsDTO[]>{
     return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/accept/username=' + username , {headers: this.headers});
   }
+
+  getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
+    return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/host/' + hostId, {headers: this.headers});
+  }
   
 }
