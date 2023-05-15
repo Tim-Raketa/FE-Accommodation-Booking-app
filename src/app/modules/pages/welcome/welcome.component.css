@@ -17,7 +17,7 @@
 }
 
 label{
-    padding: 0px 0px 0px 50px;
+    padding: 0px 5px 0px 20px;
 }
 
 .input{
@@ -25,7 +25,6 @@ label{
     border: 1px solid #000000;
     font-size: 10px;
     padding: 8px;
-    margin: 2px 0px 0px 5px;
     border-radius: 3px;
     transition: all 0.3s ease;
   }
@@ -35,7 +34,7 @@ select{
     border: 1px solid #000000;
     font-size: 10px;
     padding: 8px;
-    margin: 2px 100px 0px 5px;
+    margin: 2px 50px 0px 5px;
     border-radius: 3px;
     transition: all 0.3s ease;
 }
@@ -63,7 +62,7 @@ select{
   }
 
 .container {
-    width: 85%;
+    width: 95%;
     margin: auto;
     margin-top: 20px;
     border-radius: 3px;

@@ -13,7 +13,7 @@ export class WelcomeComponent implements OnInit {
 
   selected= 1;
   public dataSource = new MatTableDataSource<AccommodationDTO>();
-  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests'];
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'fullPrice', 'perPerson', 'perNight'];
   public accommodations: AccommodationDTO[] = [];
 
   constructor(private router: Router, private accommodationService: AccommodationService) { }
