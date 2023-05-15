@@ -6,9 +6,43 @@
     </div>
 
     <div class="container">
+
         <div class="table-header">
             <p class="table-title">Accommodations</p>
+            <div>
+                  
+                        <label for="startDate" style="padding: 5px;">Start Date:</label>
+                        <input type="date" name="startDate" class="input">
+                    
+                        <label>End Date: </label>
+                        <input type="date" name="endDate" class="input">
+               
+                        <label for="location">Location:</label>
+                        <input name="location" class="input">
+                   
+            
+                   
+                        <label>Number of people: </label>
+                        <select [(ngModel)]="selected">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                            <option value=7>7</option>
+                            <option value=8>8</option>
+                            <option value=9>9</option>
+                            <option value=10>10</option>
+                            <option value=11>11</option>
+                            <option value=12>12</option>
+                        </select>
+                
+
+                <button class="btn">Search</button>
+                </div>
         </div>
+
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
@@ -34,6 +68,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        
     </div>
 
 </div>

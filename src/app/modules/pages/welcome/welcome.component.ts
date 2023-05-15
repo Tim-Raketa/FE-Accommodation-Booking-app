@@ -11,6 +11,7 @@ import { AccommodationService } from '../../services/accommodation.service';
 })
 export class WelcomeComponent implements OnInit {
 
+  selected= 1;
   public dataSource = new MatTableDataSource<AccommodationDTO>();
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests'];
   public accommodations: AccommodationDTO[] = [];
