@@ -38,5 +38,13 @@ export class AccommodationService {
   getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
     return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/host/' + hostId, {headers: this.headers});
   }
+
+  updateRentableInterval(rentableInterval: RentableIntervalDTO): Observable<RentableIntervalDTO>{
+    return this.http.put<RentableIntervalDTO>(this.route + 'accommodations/updateRentableInterval', rentableInterval, {headers: this.headers});
+  }
+
+  getRentableIntervalById(id: number): Observable<RentableIntervalDTO>{
+    return this.http.get<RentableIntervalDTO>(this.route + 'accommodations/getRentableInterval/' + id, {headers: this.headers});
+  }
   
 }

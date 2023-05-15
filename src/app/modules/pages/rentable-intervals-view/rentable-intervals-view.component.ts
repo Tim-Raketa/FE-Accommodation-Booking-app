@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class RentableIntervalsViewComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<RentableIntervalDTO>();
-  public displayedColumns = ['startTime', 'endTime', 'priceOfAccommodation', 'pricePerGuest','automaticAcceptance'];
+  public displayedColumns = ['startTime', 'endTime', 'priceOfAccommodation', 'pricePerGuest','automaticAcceptance', 'updateInterval'];
   public rentableIntervals: RentableIntervalDTO[] = [];
   accommodationId: any
 
@@ -36,6 +36,10 @@ export class RentableIntervalsViewComponent implements OnInit {
   editProfile =  () => {
     this.router.navigateByUrl('/edit');
   };
+
+  updateInterval(id:number){
+    this.router.navigate(['host/accommodation', this.accommodationId, 'updateRentableInterval', id]);
+  }
 
   goBack(){
     this.router.navigateByUrl('/host');
