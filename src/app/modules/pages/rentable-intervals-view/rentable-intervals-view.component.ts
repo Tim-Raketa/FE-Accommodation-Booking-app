@@ -37,6 +37,10 @@ export class RentableIntervalsViewComponent implements OnInit {
     this.router.navigateByUrl('/edit');
   };
 
+  goBack(){
+    this.router.navigateByUrl('/host');
+  }
+
   logout() {
     this.authService.logout();
   }

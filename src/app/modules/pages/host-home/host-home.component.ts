@@ -15,14 +15,17 @@ export class HostHomeComponent implements OnInit {
   public dataSource = new MatTableDataSource<AccommodationDTO>();
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals'];
   public accommodations: AccommodationDTO[] = [];
+  hostId: any
 
   constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
   ngOnInit() {
-   this.accommodationService.getAccommodations().subscribe(res =>{
-    this.accommodations = res;
-    this.dataSource.data = res;
-   })
+    this.hostId = localStorage.getItem("token");
+   
+    this.accommodationService.getAccommodationsByHostId(this.hostId).subscribe(res =>{
+      this.accommodations = res;
+      this.dataSource.data = res;
+    })
   }
 
   public addAccommodation() {
