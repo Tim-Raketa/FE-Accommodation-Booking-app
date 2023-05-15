@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: new FormControl('', Validators.required),
       name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
       surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
-      residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
+      residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]+$')]),
       type: new FormControl('', Validators.required),
     }, [passwordMatch("password", "confirmPassword")])
 
