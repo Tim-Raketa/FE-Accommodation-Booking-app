@@ -12,6 +12,7 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
 import { RentableIntervalsViewComponent } from './rentable-intervals-view/rentable-intervals-view.component';
 import { CreateRentableIntervalComponent } from './create-rentable-interval/create-rentable-interval.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import { UpdateRentableIntervalComponent } from './update-rentable-interval/update-rentable-interval.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { GuestReservationsComponent } from './guest-reservations/guest-reservati
     CreateAccommodationComponent,
     RentableIntervalsViewComponent,
     CreateRentableIntervalComponent,
-    GuestReservationsComponent
+    GuestReservationsComponent,
+    UpdateRentableIntervalComponent
   ]
 })
 export class PagesModule { }
