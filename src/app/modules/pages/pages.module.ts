@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppRoutingModule } from 'src/app/app-routing.module'; 
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -12,13 +13,16 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
 import { RentableIntervalsViewComponent } from './rentable-intervals-view/rentable-intervals-view.component';
 import { CreateRentableIntervalComponent } from './create-rentable-interval/create-rentable-interval.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import { FormsModule } from '@angular/forms';
 import { UpdateRentableIntervalComponent } from './update-rentable-interval/update-rentable-interval.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    AppRoutingModule
   ],
   declarations: [
     WelcomeComponent,

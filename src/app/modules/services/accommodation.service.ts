@@ -4,6 +4,8 @@ import { AccommodationDTO } from '../model/accommodation-dto.model';
 import { Observable } from 'rxjs';
 import { RentableIntervalDTO } from '../model/rentable-interval-dto.model';
 import { ReservationIdsDTO } from '../model/reservationIdsDTO';
+import { AccommodationSearchDTO } from '../model/AccommodationSearchDTO';
+import { welcomeAccommodationDTO } from '../model/welcomeAccommodationDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,9 @@ export class AccommodationService {
   getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
     return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/host/' + hostId, {headers: this.headers});
   }
+
+  searchAccommodations(search: AccommodationSearchDTO): Observable<welcomeAccommodationDTO[]>{
+    return this.http.post<welcomeAccommodationDTO[]>(this.route + 'accommodations/search', search);
 
   updateRentableInterval(rentableInterval: RentableIntervalDTO): Observable<RentableIntervalDTO>{
     return this.http.put<RentableIntervalDTO>(this.route + 'accommodations/updateRentableInterval', rentableInterval, {headers: this.headers});
