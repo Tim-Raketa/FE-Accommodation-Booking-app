@@ -21,7 +21,7 @@ export class UserEditComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required),
     name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
     surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
-    residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')])
+    residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]+$')])
   }, [passwordMatch("password", "confirmPassword")])
   
   constructor(private router: Router, private authService : AuthService, private service: UserEditService) { }

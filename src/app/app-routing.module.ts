@@ -12,6 +12,7 @@ import { RentableIntervalsViewComponent } from './modules/pages/rentable-interva
 import { CreateRentableIntervalComponent } from './modules/pages/create-rentable-interval/create-rentable-interval.component';
 import { GuestReservationsComponent } from './modules/pages/guest-reservations/guest-reservations.component';
 import { UpdateRentableIntervalComponent } from './modules/pages/update-rentable-interval/update-rentable-interval.component';
+import { HostPendingReservationsComponent } from './modules/pages/host-pending-reservations/host-pending-reservations.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -25,6 +26,11 @@ const routes: Routes = [
   { path: 'reservations', component: GuestReservationsComponent },
   { 
     path: 'host', component: HostHomeComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  { 
+    path: 'pending/accommodation/:id', component: HostPendingReservationsComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },

@@ -18,6 +18,20 @@
 
 .btn{
     padding: 8px 10px;
+    margin: 5px;
+    font-size: 15px; 
+    border: 0px;
+    background:  #85540b;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .logoutBtn{
+    padding: 8px 10px;
+    margin: 5px;
+    float: right;
     font-size: 15px; 
     border: 0px;
     background:  #85540b;
@@ -34,7 +48,9 @@
     border-radius: 3px;
     border: #DCD6CC 1px solid;
     background-color: white;
-    background: rgba(255,255,255,0.4);
+    padding: 15px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 table {

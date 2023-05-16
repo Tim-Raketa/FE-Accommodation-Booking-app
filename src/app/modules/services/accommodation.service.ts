@@ -6,6 +6,7 @@ import { RentableIntervalDTO } from '../model/rentable-interval-dto.model';
 import { ReservationIdsDTO } from '../model/reservationIdsDTO';
 import { AccommodationSearchDTO } from '../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../model/welcomeAccommodationDTO';
+import { PendingReservations } from '../model/pendingReservations';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,18 @@ export class AccommodationService {
 
   getRentableIntervalById(id: number): Observable<RentableIntervalDTO>{
     return this.http.get<RentableIntervalDTO>(this.route + 'accommodations/getRentableInterval/' + id, {headers: this.headers});
+  }
+
+  guestCancelReservation(id: number): Observable<boolean>{
+    return this.http.put<boolean>(this.route + 'reservations/cancel/' + id, {headers: this.headers});
+  }
+
+  getPendingReservations(id: number): Observable<PendingReservations[]>{
+    return this.http.get<PendingReservations[]>(this.route + 'reservations/pending/accommodation=' + id, {headers: this.headers});
+  }
+
+  acceptPendingReservation(id: number): Observable<boolean>{
+    return this.http.put<boolean>(this.route + 'reservations/accept/' + id, {headers: this.headers});
   }
   
 }
