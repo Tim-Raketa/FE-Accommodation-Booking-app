@@ -1,6 +1,9 @@
 <div class="bgimage">
 
-    <div>
+    <div *ngIf="userRole == 'GUEST' || userRole == 'HOST'">
+        <button class="btn" (click)="home()"> Home </button>
+    </div>
+    <div *ngIf="userRole !== 'GUEST' && userRole !== 'HOST'">
         <button class="btn" (click)="goToLogin()"> Login </button>
         <button class="btn" (click)="goToRegistration()"> Sign up </button>
     </div>

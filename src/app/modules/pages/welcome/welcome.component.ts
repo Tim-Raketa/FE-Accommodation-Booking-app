@@ -14,6 +14,7 @@ import { CreateReservationDTO } from '../../model/createReservationDTO';
 })
 export class WelcomeComponent implements OnInit {
 
+  userRole = '';
   selected = 1;
   location = "";
   startDate : string = "";
@@ -28,6 +29,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.selected = 1;
+    this.userRole = localStorage.getItem("role")??'';
   }
 
   searchAccomodations(){
@@ -48,6 +50,15 @@ export class WelcomeComponent implements OnInit {
 
   goToRegistration =  () => {
     this.router.navigateByUrl('/registration');
+  };
+
+  home =  () => {
+    if(this.userRole == "GUEST"){
+      this.router.navigateByUrl('/guest');
+    } else {
+      this.router.navigateByUrl('/host');
+    }
+    
   };
 
   bookReservation(accommmodationId: number){
