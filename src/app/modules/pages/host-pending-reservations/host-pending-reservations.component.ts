@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class HostPendingReservationsComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<PendingReservations>();
-  public displayedColumns = ['username','accommodationId', 'cancelCount', 'numberOfGuests', 'startDate','endDate', 'accept', 'deny'];
+  public displayedColumns = ['username', 'cancelCount', 'numberOfGuests', 'startDate','endDate', 'accept', 'deny'];
   public pendings: PendingReservations[] = [];
   accommodationId: any
 
@@ -40,5 +40,16 @@ export class HostPendingReservationsComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  accept(reservationId: number){
+      this.accommodationService.acceptPendingReservation(reservationId).subscribe(res =>{
+       if(res === true){
+         alert("Successfully accepted reservation.")
+         this.ngOnInit();
+       }else{
+         alert("Idk")
+       }
+      })
+  };
 
 }
