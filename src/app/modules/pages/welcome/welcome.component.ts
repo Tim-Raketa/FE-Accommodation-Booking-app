@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AccommodationService } from '../../services/accommodation.service';
 import { AccommodationSearchDTO } from '../../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
+import { CreateReservationDTO } from '../../model/createReservationDTO';
+import { AuthService } from '../login/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -13,19 +15,22 @@ import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
 })
 export class WelcomeComponent implements OnInit {
 
+  userRole = '';
   selected = 1;
   location = "";
   startDate : string = "";
   endDate : string = "";
   public dataSource = new MatTableDataSource<welcomeAccommodationDTO>();
-  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'totalPrice', 'pricePerGuest', 'priceOfAccommodation'];
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'totalPrice', 'pricePerGuest', 'priceOfAccommodation', 'book'];
   public accommodations: welcomeAccommodationDTO[] = [];
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
+  public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
 
-  constructor(private router: Router, private accommodationService: AccommodationService) { }
+  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
   ngOnInit() {
     this.selected = 1;
+    this.userRole = localStorage.getItem("role")??'';
   }
 
   searchAccomodations(){
@@ -33,9 +38,8 @@ export class WelcomeComponent implements OnInit {
     this.search.endDate = this.endDate;
     this.search.location = this.location;
     this.search.numberOfGuests = this.selected;
-    console.log(this.search)
+  
     this.accommodationService.searchAccommodations(this.search).subscribe(res =>{
-      console.log(res)
       this.accommodations = res;
       this.dataSource.data = res;
      })
@@ -47,6 +51,39 @@ export class WelcomeComponent implements OnInit {
 
   goToRegistration =  () => {
     this.router.navigateByUrl('/registration');
+  };
+
+  home =  () => {
+    if(this.userRole == "GUEST"){
+      this.router.navigateByUrl('/guest');
+    } else {
+      this.router.navigateByUrl('/host');
+    }
+    
+  };
+
+  logout() {
+    this.authService.logout();
+    window.location.reload()
+  }
+
+  bookReservation(accommmodationId: number){
+    this.createReservationDTO.startDate = this.search.startDate;
+    this.createReservationDTO.endDate = this.search.endDate;
+    this.createReservationDTO.numberOfGuests = this.selected;
+    this.createReservationDTO.accommodationId = accommmodationId;
+    this.createReservationDTO.username = localStorage.getItem("token")??'';
+    console.log(this.createReservationDTO)
+
+    this.accommodationService.createReservation(this.createReservationDTO).subscribe(res =>{
+      if(res.status == "RESERVATION_STATUS_PENDING"){
+        alert("Reservation booking complete. Reservation pending for host approval. Check pending reservations.")
+        this.router.navigateByUrl('/guest');
+      } else {
+        alert("Reservation booked. Check reservations.")
+        this.router.navigateByUrl('/guest');
+      }
+     })
   };
 
 }

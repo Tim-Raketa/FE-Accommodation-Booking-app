@@ -13,25 +13,45 @@ import { AccommodationService } from '../../services/accommodation.service';
 export class GuestReservationsComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<ReservationIdsDTO>();
-  public displayedColumns = ['accommodationId', 'numOfGuests', 'startTime','endTime', "delete"];
+  public displayedColumns = ['name', 'location', 'numOfGuests', 'startTime','endTime', "delete"];
   public reservations: ReservationIdsDTO[] = [];
 
   constructor(private router: Router, private authService: AuthService, private accommodationService: AccommodationService) { }
 
   ngOnInit(){
     let username = localStorage.getItem("token")??"";
-    this.accommodationService.getGuestReservations(username).subscribe(res =>{
+    this.accommodationService.getGuestPendingReservations(username).subscribe(res =>{
       this.reservations = res;
+      this.reservations.forEach(res=> 
+        this.accommodationService.getAccommodationById(res.accommodationId).subscribe(xyz => {
+          res.accommodationLocation = xyz.location;
+          res.accommodationName = xyz.name;} 
+        ))
       this.dataSource.data = res;
     })
   }
 
-  cancelReservation(id: number){
-    this.router.navigateByUrl('/guest');
+  deleteReservation(id: number){
+    this.accommodationService.guestDeleteReservation(id).subscribe(res =>{
+        alert("Successfully deleted reservation request.")
+        this.ngOnInit();
+     })
   
   }
 
   logout() {
     this.authService.logout();
   }
+
+  editProfile =  () => {
+    this.router.navigateByUrl('/edit');
+  };
+
+  home =  () => {
+    this.router.navigateByUrl('/guest');
+  };
+
+  welcome =  () => {
+    this.router.navigateByUrl('/welcome');
+  };
 }

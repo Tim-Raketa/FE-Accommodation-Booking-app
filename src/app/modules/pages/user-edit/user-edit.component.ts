@@ -14,6 +14,8 @@ import { UserEditService } from './user-edit.service';
 })
 export class UserEditComponent implements OnInit {
 
+  userId: any
+
   editUserForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,6 +29,7 @@ export class UserEditComponent implements OnInit {
   constructor(private router: Router, private authService : AuthService, private service: UserEditService) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem("token");
     this.authService.getLoggedInUser().subscribe(res => {
       this.editUserForm.patchValue({
         username: res.username,
@@ -112,4 +115,19 @@ export class UserEditComponent implements OnInit {
     })
 
   };
+
+  logout() {
+    this.authService.logout();
+  }
+
+   deleteUser =  () => {
+    this.service.deleteUser(this.userId).subscribe(res =>{
+      if(res == true){
+        alert("Successfully deleted your account.")
+        setTimeout( () => { this.logout() }, 1500 );
+      } else {
+        alert("You cannot delete your account. You have active reservations in the future.")
+      }
+    })
+   }
 }

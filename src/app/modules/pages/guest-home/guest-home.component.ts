@@ -40,6 +40,14 @@ export class GuestHomeComponent implements OnInit {
     this.authService.logout();
   }  
 
+  welcome =  () => {
+    this.router.navigateByUrl('/welcome');
+  };
+
+  pendingReservations =  () => {
+    this.router.navigateByUrl('/reservations');
+  };
+
   cancelReservation(id: number){
      this.accommodationService.guestCancelReservation(id).subscribe(res =>{
       if(res === true){
@@ -49,6 +57,5 @@ export class GuestHomeComponent implements OnInit {
         alert("Cannot cancel this reservation.")
       }
      })
-     
   }
 }

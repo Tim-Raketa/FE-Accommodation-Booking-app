@@ -7,6 +7,7 @@ import { ReservationIdsDTO } from '../model/reservationIdsDTO';
 import { AccommodationSearchDTO } from '../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../model/welcomeAccommodationDTO';
 import { PendingReservations } from '../model/pendingReservations';
+import { CreateReservationDTO } from '../model/createReservationDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class AccommodationService {
 
   getGuestReservations(username: string): Observable<ReservationIdsDTO[]>{
     return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/accept/username=' + username , {headers: this.headers});
+  }
+
+  getGuestPendingReservations(username: string): Observable<ReservationIdsDTO[]>{
+    return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/pending/username=' + username , {headers: this.headers});
   }
 
   getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
@@ -68,6 +73,18 @@ export class AccommodationService {
 
   getAccommodationById(accomodationId: number): Observable<AccommodationDTO>{
     return this.http.get<AccommodationDTO>(this.route + 'accommodations/' + accomodationId, {headers: this.headers});
+  }
+
+  denyPendingReservation(id: number): Observable<boolean>{
+    return this.http.delete<boolean>(this.route + 'reservations/deny/' + id, {headers: this.headers});
+  }
+
+  createReservation(createReservationDTO: CreateReservationDTO): Observable<any>{
+    return this.http.post<any>(this.route + 'reservations/', createReservationDTO, {headers: this.headers});
+  }
+
+  guestDeleteReservation(id: number): Observable<boolean>{
+    return this.http.delete<boolean>(this.route + 'reservations/' + id, {headers: this.headers});
   }
   
 }

@@ -17,4 +17,8 @@ export class UserEditService {
         return this.http.post<tokenStateDTO>(this.route + 'users/edit', editUser, {headers: this.headers});
       }
 
+    deleteUser(username: string): Observable<boolean> {
+      return this.http.delete<boolean>(this.route + 'users/' + username, {headers: this.headers});
+    }
+
 }

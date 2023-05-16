@@ -35,8 +35,11 @@ export class HostHomeComponent implements OnInit {
   public viewIntervals(accommodationId: number){
     //this.router.navigate(['facilityAdmin', this.facilityAdminId, 'user', this.registeredUserId, 'appointment', appointment.id]);
     this.router.navigate(['host/accommodation', accommodationId]);
-
   }
+
+  welcome =  () => {
+    this.router.navigateByUrl('/welcome');
+  };
 
   editProfile =  () => {
     this.router.navigateByUrl('/edit');
