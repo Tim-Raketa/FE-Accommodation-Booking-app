@@ -43,6 +43,7 @@ export class AccommodationService {
 
   searchAccommodations(search: AccommodationSearchDTO): Observable<welcomeAccommodationDTO[]>{
     return this.http.post<welcomeAccommodationDTO[]>(this.route + 'accommodations/search', search);
+  }
 
   updateRentableInterval(rentableInterval: RentableIntervalDTO): Observable<RentableIntervalDTO>{
     return this.http.put<RentableIntervalDTO>(this.route + 'accommodations/updateRentableInterval', rentableInterval, {headers: this.headers});
