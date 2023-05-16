@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../login/auth.service';
 import { ReservationIdsDTO } from '../../model/reservationIdsDTO';
 import { MatTableDataSource } from '@angular/material/table';
+import { AccommodationService } from '../../services/accommodation.service';
 
 @Component({
   selector: 'app-guest-home',
@@ -15,9 +16,14 @@ export class GuestHomeComponent implements OnInit {
   public displayedColumns = ['accommodationId', 'numOfGuests', 'startTime','endTime', "delete"];
   public reservations: ReservationIdsDTO[] = [];
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private accommodationService: AccommodationService) { }
 
   ngOnInit() {
+    let username = localStorage.getItem("token")??"";
+    this.accommodationService.getGuestReservations(username).subscribe(res =>{
+      this.reservations = res;
+      this.dataSource.data = res;
+    })
   }
 
   editProfile =  () => {
@@ -28,7 +34,7 @@ export class GuestHomeComponent implements OnInit {
     this.authService.logout();
   }  
 
-  cancelReservation(id: number){
+  cancelReservation(){
      alert("Trenutno nista ne radi.")
   }
 }
