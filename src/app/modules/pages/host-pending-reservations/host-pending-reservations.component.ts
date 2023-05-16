@@ -52,4 +52,15 @@ export class HostPendingReservationsComponent implements OnInit {
       })
   };
 
+  deny(reservationId: number){
+    this.accommodationService.denyPendingReservation(reservationId).subscribe(res =>{
+     if(res === true){
+       alert("Successfully denied reservation.")
+       this.ngOnInit();
+     }else{
+       alert("Idk")
+     }
+    })
+};
+
 }

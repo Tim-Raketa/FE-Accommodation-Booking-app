@@ -69,5 +69,9 @@ export class AccommodationService {
   getAccommodationById(accomodationId: number): Observable<AccommodationDTO>{
     return this.http.get<AccommodationDTO>(this.route + 'accommodations/' + accomodationId, {headers: this.headers});
   }
+
+  denyPendingReservation(id: number): Observable<boolean>{
+    return this.http.delete<boolean>(this.route + 'reservations/deny/' + id, {headers: this.headers});
+  }
   
 }
