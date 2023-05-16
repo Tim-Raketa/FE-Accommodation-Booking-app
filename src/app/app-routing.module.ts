@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard]
   },
   { 
-    path: 'pending', component: HostPendingReservationsComponent,
+    path: 'pending/accommodation/:id', component: HostPendingReservationsComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },

@@ -13,7 +13,7 @@ import { AccommodationService } from '../../services/accommodation.service';
 export class HostHomeComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<AccommodationDTO>();
-  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals'];
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals', 'pendings'];
   public accommodations: AccommodationDTO[] = [];
   hostId: any
 
@@ -46,8 +46,8 @@ export class HostHomeComponent implements OnInit {
     this.authService.logout();
   }
 
-  pending =  () => {
-    this.router.navigateByUrl('/pending');
+  pending(accommodationId: number){
+    this.router.navigate(['pending/accommodation', accommodationId]);
   };
 
 }
