@@ -46,4 +46,8 @@ export class HostHomeComponent implements OnInit {
     this.authService.logout();
   }
 
+  pending =  () => {
+    this.router.navigateByUrl('/pending');
+  };
+
 }

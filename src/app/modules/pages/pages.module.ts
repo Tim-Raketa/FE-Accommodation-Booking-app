@@ -15,6 +15,7 @@ import { CreateRentableIntervalComponent } from './create-rentable-interval/crea
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateRentableIntervalComponent } from './update-rentable-interval/update-rentable-interval.component';
+import { HostPendingReservationsComponent } from './host-pending-reservations/host-pending-reservations.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { UpdateRentableIntervalComponent } from './update-rentable-interval/upda
     RentableIntervalsViewComponent,
     CreateRentableIntervalComponent,
     GuestReservationsComponent,
-    UpdateRentableIntervalComponent
+    UpdateRentableIntervalComponent,
+    HostPendingReservationsComponent
   ]
 })
 export class PagesModule { }
