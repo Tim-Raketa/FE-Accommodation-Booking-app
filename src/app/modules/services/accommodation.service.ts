@@ -65,5 +65,9 @@ export class AccommodationService {
   acceptPendingReservation(id: number): Observable<boolean>{
     return this.http.put<boolean>(this.route + 'reservations/accept/' + id, {headers: this.headers});
   }
+
+  getAccommodationById(accomodationId: number): Observable<AccommodationDTO>{
+    return this.http.get<AccommodationDTO>(this.route + 'accommodations/' + accomodationId, {headers: this.headers});
+  }
   
 }

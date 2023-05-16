@@ -4,6 +4,8 @@ export class ReservationIdsDTO {
     startDate: string = '';
     endDate: string = '';
     getCancelCount: number = 0;
+    accommodationName: string = '';
+    accommodationLocation: string = '';
     accommodationId: number = 0;
     username: string = '';
 
@@ -14,8 +16,8 @@ export class ReservationIdsDTO {
            this.startDate = obj.startDate;
            this.endDate = obj.endDate;   
            this.getCancelCount = obj.getCancelCount;
-           this.accommodationId = obj.accommodationId;
            this.username = obj.username;    
+           this.accommodationId = obj.accommodationId; 
         }
     }
 }

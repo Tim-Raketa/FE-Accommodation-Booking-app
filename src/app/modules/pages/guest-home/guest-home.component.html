@@ -7,9 +7,13 @@
         <div class="table-header"> <p class="table-title">Reservations</p> </div>
 
         <table mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="accommodationId">
-                <th mat-header-cell *matHeaderCellDef class="cell-center"> Accommodation Id </th>
-                <td mat-cell *matCellDef="let reservation" class="cell-center">{{reservation.accommodationId}}</td>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+                <td mat-cell *matCellDef="let reservation" class="cell-center">{{reservation.accommodationName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef class="cell-center"> Location </th>
+                <td mat-cell *matCellDef="let reservation" class="cell-center">{{reservation.accommodationLocation}}</td>
             </ng-container>
             <ng-container matColumnDef="numOfGuests">
                 <th mat-header-cell *matHeaderCellDef class="cell-center"> Number of people </th>
