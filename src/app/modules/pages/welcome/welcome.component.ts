@@ -6,6 +6,7 @@ import { AccommodationService } from '../../services/accommodation.service';
 import { AccommodationSearchDTO } from '../../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
 import { CreateReservationDTO } from '../../model/createReservationDTO';
+import { AuthService } from '../login/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -25,7 +26,7 @@ export class WelcomeComponent implements OnInit {
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
   public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
 
-  constructor(private router: Router, private accommodationService: AccommodationService) { }
+  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
   ngOnInit() {
     this.selected = 1;
@@ -60,6 +61,11 @@ export class WelcomeComponent implements OnInit {
     }
     
   };
+
+  logout() {
+    this.authService.logout();
+    window.location.reload()
+  }
 
   bookReservation(accommmodationId: number){
     this.createReservationDTO.startDate = this.search.startDate;
