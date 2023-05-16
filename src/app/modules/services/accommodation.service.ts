@@ -39,6 +39,10 @@ export class AccommodationService {
     return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/accept/username=' + username , {headers: this.headers});
   }
 
+  getGuestPendingReservations(username: string): Observable<ReservationIdsDTO[]>{
+    return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/pending/username=' + username , {headers: this.headers});
+  }
+
   getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
     return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/host/' + hostId, {headers: this.headers});
   }
@@ -77,6 +81,10 @@ export class AccommodationService {
 
   createReservation(createReservationDTO: CreateReservationDTO): Observable<any>{
     return this.http.post<any>(this.route + 'reservations/', createReservationDTO, {headers: this.headers});
+  }
+
+  guestDeleteReservation(id: number): Observable<boolean>{
+    return this.http.delete<boolean>(this.route + 'reservations/' + id, {headers: this.headers});
   }
   
 }
