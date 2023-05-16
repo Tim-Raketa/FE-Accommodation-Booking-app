@@ -52,5 +52,9 @@ export class AccommodationService {
   getRentableIntervalById(id: number): Observable<RentableIntervalDTO>{
     return this.http.get<RentableIntervalDTO>(this.route + 'accommodations/getRentableInterval/' + id, {headers: this.headers});
   }
+
+  guestCancelReservation(id: number): Observable<boolean>{
+    return this.http.put<boolean>(this.route + 'reservations/cancel/' + id, {headers: this.headers});
+  }
   
 }

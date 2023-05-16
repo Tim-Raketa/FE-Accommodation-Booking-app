@@ -34,7 +34,15 @@ export class GuestHomeComponent implements OnInit {
     this.authService.logout();
   }  
 
-  cancelReservation(){
-     alert("Trenutno nista ne radi.")
+  cancelReservation(id: number){
+     this.accommodationService.guestCancelReservation(id).subscribe(res =>{
+      if(res === true){
+        alert("Successfully canceled reservation.")
+        this.ngOnInit();
+      }else{
+        alert("Cannot cancel this reservation.")
+      }
+     })
+     
   }
 }
