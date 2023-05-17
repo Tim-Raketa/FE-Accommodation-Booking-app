@@ -29,6 +29,10 @@ export class HostPendingReservationsComponent implements OnInit {
     })
   }
 
+  welcome =  () => {
+    this.router.navigateByUrl('/welcome');
+  };
+  
   editProfile =  () => {
     this.router.navigateByUrl('/edit');
   };
