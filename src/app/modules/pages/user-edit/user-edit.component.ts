@@ -15,6 +15,7 @@ import { UserEditService } from './user-edit.service';
 export class UserEditComponent implements OnInit {
 
   userId: any
+  cancelCountt: any
 
   editUserForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
@@ -31,6 +32,7 @@ export class UserEditComponent implements OnInit {
   ngOnInit() {
     this.userId = localStorage.getItem("token");
     this.authService.getLoggedInUser().subscribe(res => {
+      this.cancelCountt = res.cancelCount;
       this.editUserForm.patchValue({
         username: res.username,
         password: res.password,
@@ -97,7 +99,8 @@ export class UserEditComponent implements OnInit {
       email: email ? email : '',
       residency: residency ? residency : '',
       type: type ? type : '',
-      oldUsername: oldUsername ? oldUsername : ''
+      oldUsername: oldUsername ? oldUsername : '',
+      cancelCount: this.cancelCountt 
     }
     console.log(user);
     this.service.editUser(user).subscribe(res => {

@@ -7,4 +7,5 @@ export interface editUserDTO {
     residency: string;
     type: string;
     oldUsername: string;
+    cancelCount: number;
 }
