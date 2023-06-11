@@ -7,6 +7,7 @@ import { AccommodationSearchDTO } from '../../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
 import { CreateReservationDTO } from '../../model/createReservationDTO';
 import { AuthService } from '../login/auth.service';
+import {filterDTO} from "../../model/filterDTO";
 
 @Component({
   selector: 'app-welcome',
@@ -30,6 +31,7 @@ export class WelcomeComponent implements OnInit {
   public accommodations: welcomeAccommodationDTO[] = [];
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
   public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
+  public filter: filterDTO=new filterDTO();
 
   constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
@@ -107,12 +109,18 @@ export class WelcomeComponent implements OnInit {
 
   }
 
-  filter() {
+  filterSearch() {
     var Amens:String="";
     for(var bonus of this.amenities){
       if(bonus.select)
       Amens+=bonus.name+","
     }
     Amens=Amens.substring(0,Amens.length-1);
+    this.filter=new filterDTO(this.search);
+    this.filter.amenities=Amens.toString();
+    this.accommodationService.filterAccommodation(this.filter).subscribe(res =>{
+      this.accommodations = res;
+      this.dataSource.data = res;}
+    );
   }
 }
