@@ -96,7 +96,6 @@ export class WelcomeComponent implements OnInit {
     const id=$event.target.value;
     // @ts-ignore
     const isChecked=$event.target.checked;
-    console.log(id,isChecked)
 
     this.amenities = this.amenities.map((d)=>{
       if(d.id==id){
@@ -106,6 +105,14 @@ export class WelcomeComponent implements OnInit {
       return d;
     })
 
-    console.log(this.amenities)
+  }
+
+  filter() {
+    var Amens:String="";
+    for(var bonus of this.amenities){
+      if(bonus.select)
+      Amens+=bonus.name+","
+    }
+    Amens=Amens.substring(0,Amens.length-1);
   }
 }
