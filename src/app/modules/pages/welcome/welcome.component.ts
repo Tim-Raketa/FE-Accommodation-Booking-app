@@ -20,6 +20,11 @@ export class WelcomeComponent implements OnInit {
   location = "";
   startDate : string = "";
   endDate : string = "";
+  amenities=[
+    {id:1,select:false,name:"tv"},
+    {id:2,select:false,name:"air-conditioning"},
+    {id:3,select:false,name:"wi-fi"},
+  ]
   public dataSource = new MatTableDataSource<welcomeAccommodationDTO>();
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'totalPrice', 'pricePerGuest', 'priceOfAccommodation', 'book'];
   public accommodations: welcomeAccommodationDTO[] = [];
@@ -38,7 +43,7 @@ export class WelcomeComponent implements OnInit {
     this.search.endDate = this.endDate;
     this.search.location = this.location;
     this.search.numberOfGuests = this.selected;
-  
+
     this.accommodationService.searchAccommodations(this.search).subscribe(res =>{
       this.accommodations = res;
       this.dataSource.data = res;
@@ -59,7 +64,7 @@ export class WelcomeComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/host');
     }
-    
+
   };
 
   logout() {
@@ -86,4 +91,21 @@ export class WelcomeComponent implements OnInit {
      })
   };
 
+  onChangeAmenities($event: Event) {
+    // @ts-ignore
+    const id=$event.target.value;
+    // @ts-ignore
+    const isChecked=$event.target.checked;
+    console.log(id,isChecked)
+
+    this.amenities = this.amenities.map((d)=>{
+      if(d.id==id){
+        d.select=isChecked;
+        return d;
+      }
+      return d;
+    })
+
+    console.log(this.amenities)
+  }
 }
