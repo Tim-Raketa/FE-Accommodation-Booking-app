@@ -18,6 +18,9 @@ import {
   GuestVisitedAccommodationsComponent
 } from "./modules/pages/guest-visited-accommodations/guest-visited-accommodations.component";
 import {GuestViewGradesComponent} from "./modules/pages/guest-view-grades/guest-view-grades.component";
+import {
+  HostAccommodationGradesComponent
+} from "./modules/pages/host-accommodation-grades/host-accommodation-grades.component";
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -66,6 +69,11 @@ const routes: Routes = [
   },
   {
     path: 'host/accommodation/:id/updateRentableInterval/:idr', component: UpdateRentableIntervalComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'host/accommodation/grade/:id', component: HostAccommodationGradesComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },

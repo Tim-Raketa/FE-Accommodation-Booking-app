@@ -19,6 +19,7 @@ import { HostPendingReservationsComponent } from './host-pending-reservations/ho
 import { HostReservationsComponent } from './host-reservations/host-reservations.component';
 import { GuestVisitedAccommodationsComponent } from './guest-visited-accommodations/guest-visited-accommodations.component';
 import { GuestViewGradesComponent } from './guest-view-grades/guest-view-grades.component';
+import { HostAccommodationGradesComponent } from './host-accommodation-grades/host-accommodation-grades.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { GuestViewGradesComponent } from './guest-view-grades/guest-view-grades.
     HostPendingReservationsComponent,
     HostReservationsComponent,
     GuestVisitedAccommodationsComponent,
-    GuestViewGradesComponent
+    GuestViewGradesComponent,
+    HostAccommodationGradesComponent
   ]
 })
 export class PagesModule { }

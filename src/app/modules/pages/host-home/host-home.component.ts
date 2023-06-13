@@ -13,7 +13,7 @@ import { AccommodationService } from '../../services/accommodation.service';
 export class HostHomeComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<AccommodationDTO>();
-  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals', 'accepted', 'pendings'];
+  public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals', 'accepted', 'pendings','grades'];
   public accommodations: AccommodationDTO[] = [];
   hostId: any
 
@@ -21,7 +21,7 @@ export class HostHomeComponent implements OnInit {
 
   ngOnInit() {
     this.hostId = localStorage.getItem("token");
-   
+
     this.accommodationService.getAccommodationsByHostId(this.hostId).subscribe(res =>{
       this.accommodations = res;
       this.dataSource.data = res;
@@ -57,4 +57,7 @@ export class HostHomeComponent implements OnInit {
     this.router.navigate(['accepted/accommodation', accommodationId]);
   };
 
+  grades(id:number) {
+    this.router.navigate(['host/accommodation/grade',id])
+  }
 }
