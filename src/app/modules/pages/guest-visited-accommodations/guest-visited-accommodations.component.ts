@@ -17,10 +17,10 @@ import {GraderService} from "../../services/grader.service";
 export class GuestVisitedAccommodationsComponent {
 
   public dataSource = new MatTableDataSource<AccommodationDTO>();
-  public accommodationId:number=0;
-  public show:boolean=false;
   public displayedColumns = ['name', 'location', 'perks', 'grade'];
   public accommodations: AccommodationDTO[] = [];
+  public accommodationId:number=0;
+  public show:boolean=false;
   GradeForm = new FormGroup({
     grade: new FormControl('', Validators.required),
   });
