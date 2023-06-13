@@ -18,6 +18,7 @@ import { UpdateRentableIntervalComponent } from './update-rentable-interval/upda
 import { HostPendingReservationsComponent } from './host-pending-reservations/host-pending-reservations.component';
 import { HostReservationsComponent } from './host-reservations/host-reservations.component';
 import { GuestVisitedAccommodationsComponent } from './guest-visited-accommodations/guest-visited-accommodations.component';
+import { GuestViewGradesComponent } from './guest-view-grades/guest-view-grades.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { GuestVisitedAccommodationsComponent } from './guest-visited-accommodati
     UpdateRentableIntervalComponent,
     HostPendingReservationsComponent,
     HostReservationsComponent,
-    GuestVisitedAccommodationsComponent
+    GuestVisitedAccommodationsComponent,
+    GuestViewGradesComponent
   ]
 })
 export class PagesModule { }
