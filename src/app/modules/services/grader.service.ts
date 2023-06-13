@@ -24,10 +24,15 @@ export class GraderService {
   getGradesForAccommodation(accommodationId: number): Observable<GradeDTO[]>{
     return this.http.get<GradeDTO[]>(this.route + '/accommodations/grader/'+accommodationId, {headers: this.headers});
   }
+  getGradesForUser(username: string): Observable<GradeDTO[]>{
+    return this.http.get<GradeDTO[]>(this.route + '/accommodations/grader/username='+username, {headers: this.headers});
+  }
   GetSpecificGrade(accommodationId: number,username:string): Observable<GradeDTO>{
     return this.http.get<GradeDTO>(this.route + '/accommodations/grader/'+accommodationId+'/'+username, {headers: this.headers});
   }
   GetAvgGrade(accommodationId: number): Observable<number>{
     return this.http.get<number>(this.route + '/accommodations/grader/avg/'+accommodationId, {headers: this.headers});
   }
+
+
 }
