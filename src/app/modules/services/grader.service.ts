@@ -17,8 +17,8 @@ export class GraderService {
   UpdateGrade(grade: GradeDTO): Observable<boolean>{
     return this.http.put<boolean>(this.route + '/accommodations/grader/',grade, {headers: this.headers});
   }
-  DeleteGrade(grade: GradeDTO): Observable<boolean>{
-    return this.http.put<boolean>(this.route + '/accommodations/grader/',grade, {headers: this.headers});
+  DeleteGrade(grade: GradeDTO): Observable<any>{
+    return this.http.delete<any>(this.route + '/accommodations/grader/'+grade.accommodationId+'/'+grade.username);
   }
 
   getGradesForAccommodation(accommodationId: number): Observable<GradeDTO[]>{

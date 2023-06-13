@@ -47,6 +47,16 @@ export class GuestViewGradesComponent {
      var grade:GradeDTO=new GradeDTO();
      grade.accommodationId=accommodationID;
      grade.username=localStorage.getItem("token")??"";
+     this.graderService.DeleteGrade(grade).subscribe(
+       created=>{if(created)
+         alert("You have successfully deleted this grade.")
+
+       else
+         alert("Something went wrong!!")
+         location.reload();
+       
+       })
+
   }
 
   update(){
@@ -60,7 +70,7 @@ export class GuestViewGradesComponent {
     grade.timeStamp=grade.timeStamp.substring(1,grade.timeStamp.length-2)
     this.graderService.UpdateGrade(grade).subscribe(
       created=>{if(created)
-        alert("You have successfully updated the grading this establishment.")
+        alert("You have successfully updated this grade.")
       else
         alert("Something went wrong!!")
       })
