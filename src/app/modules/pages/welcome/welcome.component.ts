@@ -7,6 +7,7 @@ import { AccommodationSearchDTO } from '../../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
 import { CreateReservationDTO } from '../../model/createReservationDTO';
 import { AuthService } from '../login/auth.service';
+import {filterDTO} from "../../model/filterDTO";
 
 @Component({
   selector: 'app-welcome',
@@ -20,11 +21,17 @@ export class WelcomeComponent implements OnInit {
   location = "";
   startDate : string = "";
   endDate : string = "";
+  amenities=[
+    {id:1,select:false,name:"tv"},
+    {id:2,select:false,name:"air-conditioning"},
+    {id:3,select:false,name:"wi-fi"},
+  ]
   public dataSource = new MatTableDataSource<welcomeAccommodationDTO>();
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'totalPrice', 'pricePerGuest', 'priceOfAccommodation', 'book'];
   public accommodations: welcomeAccommodationDTO[] = [];
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
   public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
+  public filter: filterDTO=new filterDTO();
 
   constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
@@ -38,7 +45,7 @@ export class WelcomeComponent implements OnInit {
     this.search.endDate = this.endDate;
     this.search.location = this.location;
     this.search.numberOfGuests = this.selected;
-  
+
     this.accommodationService.searchAccommodations(this.search).subscribe(res =>{
       this.accommodations = res;
       this.dataSource.data = res;
@@ -59,7 +66,7 @@ export class WelcomeComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/host');
     }
-    
+
   };
 
   logout() {
@@ -86,4 +93,34 @@ export class WelcomeComponent implements OnInit {
      })
   };
 
+  onChangeAmenities($event: Event) {
+    // @ts-ignore
+    const id=$event.target.value;
+    // @ts-ignore
+    const isChecked=$event.target.checked;
+
+    this.amenities = this.amenities.map((d)=>{
+      if(d.id==id){
+        d.select=isChecked;
+        return d;
+      }
+      return d;
+    })
+
+  }
+
+  filterSearch() {
+    var Amens:String="";
+    for(var bonus of this.amenities){
+      if(bonus.select)
+      Amens+=bonus.name+","
+    }
+    Amens=Amens.substring(0,Amens.length-1);
+    this.filter=new filterDTO(this.search);
+    this.filter.amenities=Amens.toString();
+    this.accommodationService.filterAccommodation(this.filter).subscribe(res =>{
+      this.accommodations = res;
+      this.dataSource.data = res;}
+    );
+  }
 }

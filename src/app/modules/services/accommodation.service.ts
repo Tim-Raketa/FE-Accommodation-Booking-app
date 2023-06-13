@@ -8,6 +8,7 @@ import { AccommodationSearchDTO } from '../model/AccommodationSearchDTO';
 import { welcomeAccommodationDTO } from '../model/welcomeAccommodationDTO';
 import { PendingReservations } from '../model/pendingReservations';
 import { CreateReservationDTO } from '../model/createReservationDTO';
+import {filterDTO} from "../model/filterDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -90,5 +91,7 @@ export class AccommodationService {
   guestDeleteReservation(id: number): Observable<boolean>{
     return this.http.delete<boolean>(this.route + 'reservations/' + id, {headers: this.headers});
   }
-  
+  filterAccommodation(filter: filterDTO): Observable<welcomeAccommodationDTO[]>{
+    return this.http.post<welcomeAccommodationDTO[]>(this.route + 'accommodations/filter', filter);
+  }
 }
