@@ -40,7 +40,9 @@ export class GuestHomeComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
   welcome =  () => {
     this.router.navigateByUrl('/welcome');
   };

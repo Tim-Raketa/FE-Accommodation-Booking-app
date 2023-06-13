@@ -76,7 +76,9 @@ export class GuestVisitedAccommodationsComponent {
   welcome =  () => {
     this.router.navigateByUrl('/welcome');
   };
-
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
   visited() {
     this.router.navigateByUrl('/visited');
   }

@@ -51,7 +51,9 @@ export class GuestReservationsComponent implements OnInit {
   home =  () => {
     this.router.navigateByUrl('/guest');
   };
-
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
   welcome =  () => {
     this.router.navigateByUrl('/welcome');
   };
