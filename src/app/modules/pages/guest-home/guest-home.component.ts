@@ -13,7 +13,8 @@ import { AccommodationService } from '../../services/accommodation.service';
 export class GuestHomeComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<ReservationIdsDTO>();
-  public displayedColumns = ['name', 'location', 'numOfGuests', 'startTime','endTime', "delete"];
+  public displayedColumns = ['name', 'location', 'numOfGuests',
+    'startTime','endTime', "delete"];
   public reservations: ReservationIdsDTO[] = [];
 
   constructor(private router: Router, private authService: AuthService, private accommodationService: AccommodationService) { }
@@ -22,10 +23,10 @@ export class GuestHomeComponent implements OnInit {
     let username = localStorage.getItem("token")??"";
     this.accommodationService.getGuestReservations(username).subscribe(res =>{
       this.reservations = res;
-      this.reservations.forEach(res=> 
+      this.reservations.forEach(res=>
         this.accommodationService.getAccommodationById(res.accommodationId).subscribe(xyz => {
           res.accommodationLocation = xyz.location;
-          res.accommodationName = xyz.name;} 
+          res.accommodationName = xyz.name;}
         ))
         console.log(res)
       this.dataSource.data = res;
@@ -38,14 +39,19 @@ export class GuestHomeComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-  }  
-
+  }
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
   welcome =  () => {
     this.router.navigateByUrl('/welcome');
   };
 
   pendingReservations =  () => {
     this.router.navigateByUrl('/reservations');
+  };
+  visited(){
+    this.router.navigateByUrl('/visited');
   };
 
   cancelReservation(id: number){

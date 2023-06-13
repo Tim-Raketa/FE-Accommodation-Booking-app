@@ -92,6 +92,10 @@ export class AccommodationService {
     return this.http.delete<boolean>(this.route + 'reservations/' + id, {headers: this.headers});
   }
   filterAccommodation(filter: filterDTO): Observable<welcomeAccommodationDTO[]>{
-    return this.http.post<welcomeAccommodationDTO[]>(this.route + 'accommodations/filter', filter);
+    return this.http.post<welcomeAccommodationDTO[]>(this.route + 'accommodations/filter', filter, {headers: this.headers});
   }
+  HasVisited(username: String): Observable<AccommodationDTO[]>{
+    return this.http.get<AccommodationDTO[]>(this.route + 'reservations/hasVisited/'+ username, {headers: this.headers});
+  }
+
 }

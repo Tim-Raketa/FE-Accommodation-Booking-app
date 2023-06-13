@@ -1,0 +1,56 @@
+<div class="bgimage">
+  <div>
+    <button class="btn" (click)="welcome()"> Welcome page </button>
+    <button class="btn" (click)="home()"> Home </button>
+    <button class="btn" (click)="editProfile()"> Edit Profile </button>
+    <button class="btn" (click)="visited()">Visited accommodations</button>
+    <button class="logoutBtn" (click)="logout()"> Logout </button>
+  </div>
+  <div class="container">
+    <div class="table-header"> <p class="table-title">Visited Accommodations</p> </div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="accommodationName">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
+        <td mat-cell *matCellDef="let grade" class="cell-center">{{grade.accommodationName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="grade">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> Grade </th>
+        <td mat-cell *matCellDef="let grade" class="cell-center">{{grade.grade}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> </th>
+        <td mat-cell *matCellDef="let grade" class="cell-center">
+          <button class="btn"  (click)="delete( grade.accommodationId)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> </th>
+        <td mat-cell *matCellDef="let grade" class="cell-center">
+          <button class="btn"  (click)="showUpdate(grade.accommodationId)">
+            Grade
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div class="form" *ngIf="show">
+    <form [formGroup]="GradeForm">
+
+      <div class="inputfield">
+        <label for="grade">Grade:</label>
+        <input type="text" formControlName="grade" class="input">
+      </div>
+
+
+      <div class="inputfield">
+        <button [disabled]="GradeForm.invalid" class="btn" (click)="update()">Update</button>
+      </div>
+
+    </form>
+  </div>
+</div>

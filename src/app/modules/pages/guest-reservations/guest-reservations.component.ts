@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../login/auth.service';
 import { ReservationIdsDTO } from '../../model/reservationIdsDTO';
 import { AccommodationService } from '../../services/accommodation.service';
+import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
 
 @Component({
   selector: 'app-guest-reservations',
@@ -22,10 +23,10 @@ export class GuestReservationsComponent implements OnInit {
     let username = localStorage.getItem("token")??"";
     this.accommodationService.getGuestPendingReservations(username).subscribe(res =>{
       this.reservations = res;
-      this.reservations.forEach(res=> 
+      this.reservations.forEach(res=>
         this.accommodationService.getAccommodationById(res.accommodationId).subscribe(xyz => {
           res.accommodationLocation = xyz.location;
-          res.accommodationName = xyz.name;} 
+          res.accommodationName = xyz.name;}
         ))
       this.dataSource.data = res;
     })
@@ -36,7 +37,7 @@ export class GuestReservationsComponent implements OnInit {
         alert("Successfully deleted reservation request.")
         this.ngOnInit();
      })
-  
+
   }
 
   logout() {
@@ -50,8 +51,13 @@ export class GuestReservationsComponent implements OnInit {
   home =  () => {
     this.router.navigateByUrl('/guest');
   };
-
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
   welcome =  () => {
     this.router.navigateByUrl('/welcome');
+  };
+  visited(){
+    this.router.navigateByUrl('/visited');
   };
 }

@@ -14,28 +14,45 @@ import { GuestReservationsComponent } from './modules/pages/guest-reservations/g
 import { UpdateRentableIntervalComponent } from './modules/pages/update-rentable-interval/update-rentable-interval.component';
 import { HostPendingReservationsComponent } from './modules/pages/host-pending-reservations/host-pending-reservations.component';
 import { HostReservationsComponent } from './modules/pages/host-reservations/host-reservations.component';
+import {
+  GuestVisitedAccommodationsComponent
+} from "./modules/pages/guest-visited-accommodations/guest-visited-accommodations.component";
+import {GuestViewGradesComponent} from "./modules/pages/guest-view-grades/guest-view-grades.component";
+import {
+  HostAccommodationGradesComponent
+} from "./modules/pages/host-accommodation-grades/host-accommodation-grades.component";
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
-  { 
+  {
     path: 'guest', component: GuestHomeComponent,
     data: { allowedRoles: ['GUEST'] },
     canActivate: [AuthorizationGuard]
   },
+  {
+    path: 'visited', component: GuestVisitedAccommodationsComponent,
+    data: { allowedRoles: ['GUEST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'guest/grades', component: GuestViewGradesComponent,
+    data: { allowedRoles: ['GUEST'] },
+    canActivate: [AuthorizationGuard]
+  },
   { path: 'reservations', component: GuestReservationsComponent },
-  { 
+  {
     path: 'host', component: HostHomeComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },
-  { 
+  {
     path: 'pending/accommodation/:id', component: HostPendingReservationsComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },
-  { 
+  {
     path: 'accepted/accommodation/:id', component: HostReservationsComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
@@ -56,11 +73,16 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard]
   },
   {
+    path: 'host/accommodation/grade/:id', component: HostAccommodationGradesComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  {
     path: 'host/createAccommodation', component: CreateAccommodationComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },
-  { 
+  {
     path: 'edit', component: UserEditComponent,
     data: { allowedRoles: ['HOST', 'GUEST'] } ,
     canActivate: [AuthorizationGuard]

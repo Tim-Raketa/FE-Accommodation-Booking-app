@@ -17,6 +17,9 @@ import { FormsModule } from '@angular/forms';
 import { UpdateRentableIntervalComponent } from './update-rentable-interval/update-rentable-interval.component';
 import { HostPendingReservationsComponent } from './host-pending-reservations/host-pending-reservations.component';
 import { HostReservationsComponent } from './host-reservations/host-reservations.component';
+import { GuestVisitedAccommodationsComponent } from './guest-visited-accommodations/guest-visited-accommodations.component';
+import { GuestViewGradesComponent } from './guest-view-grades/guest-view-grades.component';
+import { HostAccommodationGradesComponent } from './host-accommodation-grades/host-accommodation-grades.component';
 
 @NgModule({
   imports: [
@@ -39,7 +42,10 @@ import { HostReservationsComponent } from './host-reservations/host-reservations
     GuestReservationsComponent,
     UpdateRentableIntervalComponent,
     HostPendingReservationsComponent,
-    HostReservationsComponent
+    HostReservationsComponent,
+    GuestVisitedAccommodationsComponent,
+    GuestViewGradesComponent,
+    HostAccommodationGradesComponent
   ]
 })
 export class PagesModule { }
