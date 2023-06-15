@@ -16,6 +16,7 @@ export class UserEditComponent implements OnInit {
 
   userId: any
   cancelCountt: any
+  prominent: any
 
   editUserForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
@@ -33,6 +34,7 @@ export class UserEditComponent implements OnInit {
     this.userId = localStorage.getItem("token");
     this.authService.getLoggedInUser().subscribe(res => {
       this.cancelCountt = res.cancelCount;
+      this.prominent = res.prominent;
       this.editUserForm.patchValue({
         username: res.username,
         password: res.password,
@@ -100,7 +102,8 @@ export class UserEditComponent implements OnInit {
       residency: residency ? residency : '',
       type: type ? type : '',
       oldUsername: oldUsername ? oldUsername : '',
-      cancelCount: this.cancelCountt 
+      cancelCount: this.cancelCountt,
+      prominent: this.prominent
     }
     console.log(user);
     this.service.editUser(user).subscribe(res => {
