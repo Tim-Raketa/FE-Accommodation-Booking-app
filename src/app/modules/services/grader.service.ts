@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AccommodationDTO} from "../model/accommodation-dto.model";
 import {GradeDTO} from "../model/GradeDTO";
+import { registerUserDTO } from "../model/registerUserDTO";
+import { HostGradeDTO } from "../model/host-grade-dto.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,12 @@ export class GraderService {
     return this.http.get<number>(this.route + '/accommodations/grader/avg/'+accommodationId, {headers: this.headers});
   }
 
+  getUser(username: string): Observable<registerUserDTO>{
+    return this.http.get<registerUserDTO>(this.route + 'users/getUser/' + username, {headers: this.headers});
+  }
+
+  createHostGrade(hostGrade: HostGradeDTO): Observable<boolean>{
+    return this.http.post<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
+  }
 
 }
