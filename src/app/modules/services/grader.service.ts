@@ -56,4 +56,12 @@ export class GraderService {
     return this.http.put<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
   }
 
+  getGradesForHost(hostId: string): Observable<HostGradeDTO[]>{
+    return this.http.get<HostGradeDTO[]>(this.route + '/accommodations/grader/host/' + hostId, {headers: this.headers});
+  }
+
+  getAvgHostGrade(hostId: string): Observable<number>{
+    return this.http.get<number>(this.route + '/accommodations/grader/host/avg/' + hostId, {headers: this.headers});
+  }
+
 }

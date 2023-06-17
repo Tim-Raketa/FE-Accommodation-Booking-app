@@ -45,6 +45,10 @@ export class HostHomeComponent implements OnInit {
     this.router.navigateByUrl('/edit');
   };
 
+  hostGrades(){
+    this.router.navigate(['/host/grades']);
+  }
+
   logout() {
     this.authService.logout();
   }

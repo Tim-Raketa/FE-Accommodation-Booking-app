@@ -17,8 +17,9 @@ export class HostAccommodationGradesComponent {
   public displayedColumns = ['username', 'grade', 'timeStamp'];
   public grades: GradeDTO[] = [];
   accommodationId: any
+  public avgGrade: number = 0;
 
-    constructor(private router: Router, private route: ActivatedRoute, private graderService:GraderService , private authService: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private graderService:GraderService , private authService: AuthService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params)=>{
@@ -26,6 +27,10 @@ export class HostAccommodationGradesComponent {
       this.graderService.getGradesForAccommodation(this.accommodationId).subscribe(res =>{
         this.grades = res;
         this.dataSource.data = this.grades;
+      })
+
+      this.graderService.GetAvgGrade(this.accommodationId).subscribe(res=>{
+        this.avgGrade = res;
       })
     })
   }
@@ -40,4 +45,9 @@ export class HostAccommodationGradesComponent {
   logout() {
     this.authService.logout();
   }
+
+  goBack(){
+    this.router.navigateByUrl('/host');
+  }
+
 }
