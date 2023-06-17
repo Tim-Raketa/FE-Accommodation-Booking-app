@@ -7,7 +7,7 @@
     <button class="logoutBtn" (click)="logout()"> Logout </button>
   </div>
   <div class="container">
-    <div class="table-header"> <p class="table-title">Visited Accommodations</p> </div>
+    <div class="table-header"> <p class="table-title">Grades For Accommodations</p> </div>
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="accommodationName">
         <th mat-header-cell *matHeaderCellDef class="cell-center"> Name </th>
@@ -38,19 +38,24 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <div class="form" *ngIf="show">
-    <form [formGroup]="GradeForm">
+  <div class="wrapper" *ngIf="show">
+    <div class="title">
+        Update Grade  
+    </div>
+    <div class="form">
+      <form [formGroup]="GradeForm">
 
-      <div class="inputfield">
-        <label for="grade">Grade:</label>
-        <input type="text" formControlName="grade" class="input">
-      </div>
+        <div class="inputfield">
+          <label for="grade">Grade:</label>
+          <input type="text" formControlName="grade" class="input">
+        </div>
 
 
-      <div class="inputfield">
-        <button [disabled]="GradeForm.invalid" class="btn" (click)="update()">Update</button>
-      </div>
+        <div class="inputfield">
+          <button [disabled]="GradeForm.invalid" class="btn" (click)="update()">Update</button>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 </div>
