@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AccommodationDTO} from "../model/accommodation-dto.model";
 import {GradeDTO} from "../model/GradeDTO";
+import { registerUserDTO } from "../model/registerUserDTO";
+import { HostGradeDTO } from "../model/host-grade-dto.model";
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +40,32 @@ export class GraderService {
     return this.http.get<Boolean>(this.route + '/users/prominent-host/' + hostId, {headers: this.headers});
   }
 
+  getUser(username: string): Observable<registerUserDTO>{
+    return this.http.get<registerUserDTO>(this.route + 'users/getUser/' + username, {headers: this.headers});
+  }
+
+  createHostGrade(hostGrade: HostGradeDTO): Observable<boolean>{
+    return this.http.post<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
+  }
+
+  getHostGradesByUser(username: string): Observable<HostGradeDTO[]>{
+    return this.http.get<HostGradeDTO[]>(this.route + '/accommodations/grader/host/username='+username, {headers: this.headers});
+  }
+
+  deleteHostGrade(hostGrade: HostGradeDTO): Observable<any>{
+    return this.http.delete<any>(this.route + '/accommodations/grader/host/' + hostGrade.hostId + '/' + hostGrade.username);
+  }
+
+  updateHostGrade(hostGrade: HostGradeDTO): Observable<boolean>{
+    return this.http.put<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
+  }
+
+  getGradesForHost(hostId: string): Observable<HostGradeDTO[]>{
+    return this.http.get<HostGradeDTO[]>(this.route + '/accommodations/grader/host/' + hostId, {headers: this.headers});
+  }
+
+  getAvgHostGrade(hostId: string): Observable<number>{
+    return this.http.get<number>(this.route + '/accommodations/grader/host/avg/' + hostId, {headers: this.headers});
+  }
 
 }

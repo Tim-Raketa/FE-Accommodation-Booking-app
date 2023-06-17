@@ -21,6 +21,7 @@ import {GuestViewGradesComponent} from "./modules/pages/guest-view-grades/guest-
 import {
   HostAccommodationGradesComponent
 } from "./modules/pages/host-accommodation-grades/host-accommodation-grades.component";
+import { HostGradesComponent } from './modules/pages/host-grades/host-grades.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -79,6 +80,11 @@ const routes: Routes = [
   },
   {
     path: 'host/createAccommodation', component: CreateAccommodationComponent,
+    data: { allowedRoles: ['HOST'] },
+    canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'host/grades', component: HostGradesComponent,
     data: { allowedRoles: ['HOST'] },
     canActivate: [AuthorizationGuard]
   },
