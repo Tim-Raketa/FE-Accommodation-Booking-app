@@ -8,4 +8,5 @@ export interface editUserDTO {
     type: string;
     oldUsername: string;
     cancelCount: number;
+    prominent: boolean;
 }
