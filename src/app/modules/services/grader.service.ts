@@ -44,4 +44,16 @@ export class GraderService {
     return this.http.post<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
   }
 
+  getHostGradesByUser(username: string): Observable<HostGradeDTO[]>{
+    return this.http.get<HostGradeDTO[]>(this.route + '/accommodations/grader/host/username='+username, {headers: this.headers});
+  }
+
+  deleteHostGrade(hostGrade: HostGradeDTO): Observable<any>{
+    return this.http.delete<any>(this.route + '/accommodations/grader/host/' + hostGrade.hostId + '/' + hostGrade.username);
+  }
+
+  updateHostGrade(hostGrade: HostGradeDTO): Observable<boolean>{
+    return this.http.put<boolean>(this.route + '/accommodations/grader/host', hostGrade, {headers: this.headers});
+  }
+
 }

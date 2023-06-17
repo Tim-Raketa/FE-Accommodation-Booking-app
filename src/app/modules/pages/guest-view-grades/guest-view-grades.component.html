@@ -38,6 +38,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+
   <div class="wrapper" *ngIf="show">
     <div class="title">
         Update Grade  
@@ -58,4 +59,59 @@
       </form>
     </div>
   </div>
+
+  <div class="container">
+    <div class="table-header"> <p class="table-title">Grades For Hosts</p> </div>
+    <table mat-table [dataSource]="dataSource2">
+      <ng-container matColumnDef="host">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> Host </th>
+        <td mat-cell *matCellDef="let hostGrade" class="cell-center">{{hostGrade.hostNameSurname}}</td>
+      </ng-container>
+      <ng-container matColumnDef="grade">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> Grade </th>
+        <td mat-cell *matCellDef="let hostGrade" class="cell-center">{{hostGrade.grade}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> </th>
+        <td mat-cell *matCellDef="let hostGrade" class="cell-center">
+          <button class="btn"  (click)="deleteHost(hostGrade.hostId)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef class="cell-center"> </th>
+        <td mat-cell *matCellDef="let hostGrade" class="cell-center">
+          <button class="btn"  (click)="showUpdateHost(hostGrade.hostId)">
+            Grade
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+    </table>
+  </div>
+  
+  <div class="wrapper" *ngIf="showHost">
+    <div class="title">
+        Update Grade  
+    </div>
+    <div class="form">
+      <form [formGroup]="GradeForm">
+
+        <div class="inputfield">
+          <label for="grade">Grade:</label>
+          <input type="text" formControlName="grade" class="input">
+        </div>
+
+
+        <div class="inputfield">
+          <button [disabled]="GradeForm.invalid" class="btn" (click)="updateHost()">Update</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
 </div>
