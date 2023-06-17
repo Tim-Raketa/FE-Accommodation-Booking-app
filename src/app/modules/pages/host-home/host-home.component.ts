@@ -4,6 +4,7 @@ import { AuthService } from '../login/auth.service';
 import { AccommodationDTO } from '../../model/accommodation-dto.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccommodationService } from '../../services/accommodation.service';
+import { GraderService } from '../../services/grader.service';
 
 @Component({
   selector: 'app-host-home',
@@ -16,8 +17,9 @@ export class HostHomeComponent implements OnInit {
   public displayedColumns = ['name', 'location', 'perks', 'minGuests','maxGuests', 'viewIntervals', 'accepted', 'pendings','grades'];
   public accommodations: AccommodationDTO[] = [];
   hostId: any
+  prominentStatus: any
 
-  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
+  constructor(private router: Router, private accommodationService: AccommodationService, private graderService: GraderService, private authService: AuthService) { }
 
   ngOnInit() {
     this.hostId = localStorage.getItem("token");
@@ -25,6 +27,10 @@ export class HostHomeComponent implements OnInit {
     this.accommodationService.getAccommodationsByHostId(this.hostId).subscribe(res =>{
       this.accommodations = res;
       this.dataSource.data = res;
+    })
+
+    this.graderService.getProminentStatus(this.hostId).subscribe(res =>{
+      this.prominentStatus = res;
     })
   }
 

@@ -28,6 +28,18 @@
     outline: none;
   }
 
+  .prominent{
+    padding: 8px 10px;
+    margin: 5px;
+    font-size: 15px; 
+    border: 0px;
+    background:  #ffd900e6;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+  }
+
   .logoutBtn{
     padding: 8px 10px;
     float: right;

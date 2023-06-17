@@ -34,5 +34,9 @@ export class GraderService {
     return this.http.get<number>(this.route + '/accommodations/grader/avg/'+accommodationId, {headers: this.headers});
   }
 
+  getProminentStatus(hostId: number): Observable<Boolean>{
+    return this.http.get<Boolean>(this.route + '/users/prominent-host/' + hostId, {headers: this.headers});
+  }
+
 
 }
