@@ -5,6 +5,10 @@ import { AccommodationDTO } from '../../model/accommodation-dto.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccommodationService } from '../../services/accommodation.service';
 import { GraderService } from '../../services/grader.service';
+import {NotificationService} from "../../services/notification.service";
+import * as SockJS from "sockjs-client";
+import * as Stomp from "stompjs";
+import {NotificationDTO} from "../../model/NotificationDTO";
 
 @Component({
   selector: 'app-host-home',
@@ -18,11 +22,16 @@ export class HostHomeComponent implements OnInit {
   public accommodations: AccommodationDTO[] = [];
   hostId: any
   prominentStatus: any
+  private stompClient: any;
 
-  constructor(private router: Router, private accommodationService: AccommodationService, private graderService: GraderService, private authService: AuthService) { }
+
+  constructor(private router: Router, private accommodationService: AccommodationService, private notificationService: NotificationService, private graderService: GraderService, private authService: AuthService) { }
 
   ngOnInit() {
     this.hostId = localStorage.getItem("token");
+
+    this.initializeWebSocketConnection(localStorage.getItem("token")??"")
+    this.loadNotifications()
 
     this.accommodationService.getAccommodationsByHostId(this.hostId).subscribe(res =>{
       this.accommodations = res;
@@ -32,6 +41,43 @@ export class HostHomeComponent implements OnInit {
     this.graderService.getProminentStatus(this.hostId).subscribe(res =>{
       this.prominentStatus = res;
     })
+  }
+  initializeWebSocketConnection(email: string) {
+    //povezujemo se na socket
+    let ws = new SockJS('http://localhost:8081/socket');
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.debug = null;
+    let that = this;
+    //this.loadNotifications();
+
+    //notifijujemo za promenu
+    this.stompClient.connect({}, () => {
+      that.stompClient.subscribe('/notify/' + email, (message: { body: string }) => {
+        console.log(message.body);
+        //pozivamo notifs
+        this.loadNotifications();
+      });
+    });
+  }
+  loadNotifications() {
+    console.log("RELOADING");
+    let username=localStorage.getItem("token")??"";
+    if (username!="") {
+      this.notificationService.getNotifications(username).subscribe((resp: NotificationDTO[]) => {
+        let result= resp.map(notif=> {
+          if(!notif.opened) return notif
+          else
+            return ;
+        })
+        result.forEach(res => {
+          if(res??"") {
+            alert(res?.message);
+            this.notificationService.openNotifications(<Number>res?.id).subscribe()
+          }
+        })
+      });
+    }
+
   }
 
   public addAccommodation() {
