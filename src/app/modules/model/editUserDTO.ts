@@ -9,4 +9,5 @@ export interface editUserDTO {
     oldUsername: string;
     cancelCount: number;
     prominent: boolean;
+    notificationTypes:string;
 }

@@ -17,6 +17,18 @@ export class UserEditComponent implements OnInit {
   userId: any
   cancelCountt: any
   prominent: any
+  types:any="";
+  userIds=[6]
+  hostIds=[1,2,3,4,5]
+
+  notificationTypes=[
+    {id:1,select:false,name:"ReservationReq"},
+    {id:2,select:false,name:"ReservationCancel"},
+    {id:3,select:false,name:"AccommodationGrade"},
+    {id:4,select:false,name:"HostGrade"},
+    {id:5,select:false,name:"ProminentStatus"},
+    {id:6,select:false,name:"ReservationResponse"}
+  ]
 
   editUserForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
@@ -27,7 +39,7 @@ export class UserEditComponent implements OnInit {
     surname: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+$')]),
     residency: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]+$')])
   }, [passwordMatch("password", "confirmPassword")])
-  
+
   constructor(private router: Router, private authService : AuthService, private service: UserEditService) { }
 
   ngOnInit() {
@@ -44,7 +56,26 @@ export class UserEditComponent implements OnInit {
         email: res.email,
         residency: res.residency
       })
+      let notiftypes=res.notificationTypes;
+      var splitted = notiftypes.split(",", 10);
+      this.notificationTypes.forEach(notif=>
+      {
+        if(splitted.includes(notif.name))
+          notif.select=true;
+      })
+      var newTypes:any[]=[];
+      this.notificationTypes.forEach(type=>{
+        if(res.type=="GUEST"){
+          if(this.userIds.includes(type.id))
+            newTypes.push(type)
+        }
+        else if(this.hostIds.includes(type.id))
+          newTypes.push(type)
+
+      })
+      this.notificationTypes=newTypes;
     })
+
   }
 
   get username(){
@@ -81,7 +112,7 @@ export class UserEditComponent implements OnInit {
     } else if (localStorage.getItem('role') == "GUEST"){
       this.router.navigateByUrl('/guest');
     }
-    
+
   };
 
   editUser =  () => {
@@ -93,6 +124,7 @@ export class UserEditComponent implements OnInit {
     let residency = this.editUserForm.get("residency")?.value
     let type = localStorage.getItem("role");
     let oldUsername = localStorage.getItem("token");
+    let types=this.types;
     let user: editUserDTO = {
       username: username ? username : '',
       password: password ? password : '',
@@ -103,7 +135,8 @@ export class UserEditComponent implements OnInit {
       type: type ? type : '',
       oldUsername: oldUsername ? oldUsername : '',
       cancelCount: this.cancelCountt,
-      prominent: this.prominent
+      prominent: this.prominent,
+      notificationTypes: types ? types : ''
     }
     console.log(user);
     this.service.editUser(user).subscribe(res => {
@@ -115,7 +148,7 @@ export class UserEditComponent implements OnInit {
       localStorage.setItem("token", user.username);
       this.goToHome();
       }
-    }, error => 
+    }, error =>
     {
       console.log(error)
     })
@@ -136,4 +169,24 @@ export class UserEditComponent implements OnInit {
       }
     })
    }
+
+  onChangeNotificationTypes($event: Event) {
+    // @ts-ignore
+    const id=$event.target.value;
+    // @ts-ignore
+    const isChecked=$event.target.checked;
+
+    this.notificationTypes = this.notificationTypes.map((d)=>{
+      if(d.id==id){
+        d.select=isChecked;
+        return d;
+      }
+      return d;
+    })
+    this.types=""
+    for(var bonus of this.notificationTypes){
+      if(bonus.select)
+      this.types += bonus.name + ","
+    }
+  }
 }

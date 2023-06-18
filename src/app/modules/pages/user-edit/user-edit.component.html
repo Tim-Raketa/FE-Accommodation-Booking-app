@@ -1,11 +1,11 @@
 <div class="bgimage">
   <div class="wrapper">
       <div class="title">
-          Edit  
+          Edit
       </div>
       <div class="form">
         <form [formGroup]="editUserForm">
-          
+
           <div class="inputfield">
               <label for="username">Username:</label>
               <input type="text" name="username" formControlName="username" class="input">
@@ -68,7 +68,27 @@
             <label></label>
             <span style="color: red; font-size: medium; font: bold;" *ngIf="residency && residency.invalid && residency.touched"> This residency is invalid! </span>
           </div>
-
+          <div>
+            <table class="table">
+              <thead>
+              <th>Amenities</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let n of notificationTypes">
+                <th scope="row">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [value]="n.id"
+                    [checked]="n.select"
+                    (change)="onChangeNotificationTypes($event)"
+                  />
+                </th>
+                <td>{{ n.name }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
           <div class="inputfield">
             <button class="btn" [disabled]="editUserForm.pristine || editUserForm.invalid" (click)="editUser()">Save changes</button>
           </div>
@@ -81,7 +101,7 @@
             <button class="btn" (click)="goToHome()">Cancel and return to home</button>
           </div>
 
-        </form> 
+        </form>
       </div>
     </div>
 </div>
