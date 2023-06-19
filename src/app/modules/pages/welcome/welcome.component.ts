@@ -10,6 +10,7 @@ import { AuthService } from '../login/auth.service';
 import {filterDTO} from "../../model/filterDTO";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { passwordMatch } from '../../custom-validators/passwordMatch';
+import {GraderService} from "../../services/grader.service";
 
 @Component({
   selector: 'app-welcome',
@@ -34,11 +35,12 @@ export class WelcomeComponent implements OnInit {
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
   public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
   public filter: filterDTO=new filterDTO();
+  public prominent:Boolean=false;
 
   priceForm = new FormGroup({
     minPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
     maxPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
-    
+
   })
 
   get minPrice(){
@@ -48,7 +50,7 @@ export class WelcomeComponent implements OnInit {
     return this.priceForm.get('maxPrice');
   }
 
-  constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
+  constructor(private router: Router, private accommodationService: AccommodationService,private graderService:GraderService ,private authService: AuthService) { }
 
   ngOnInit() {
     this.selected = 1;
@@ -139,11 +141,27 @@ export class WelcomeComponent implements OnInit {
     this.filter.minGrade = Number(minPrice);
     this.filter.maxGrade = Number(maxPrice);
 
+
+    //
     console.log(this.filter)
 
     this.accommodationService.filterAccommodation(this.filter).subscribe(res =>{
       this.accommodations = res;
-      this.dataSource.data = res;}
+      let potential:welcomeAccommodationDTO[]=[]
+      let any:any;
+      if(this.prominent){
+        this.accommodations.filter(accommodation=>this.accommodationService.getAccommodationById(accommodation.accommodationId)
+          .subscribe(res=>{
+              any=res;
+              this.graderService.getProminentStatus(res.hostId).subscribe(ret=>
+              {if(ret)
+                potential.push(any)
+              })
+        }))
+        this.dataSource.data=potential
+      } else
+      this.dataSource.data = res;
+    }
     );
   }
 }
