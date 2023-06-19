@@ -8,6 +8,8 @@ import { welcomeAccommodationDTO } from '../../model/welcomeAccommodationDTO';
 import { CreateReservationDTO } from '../../model/createReservationDTO';
 import { AuthService } from '../login/auth.service';
 import {filterDTO} from "../../model/filterDTO";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { passwordMatch } from '../../custom-validators/passwordMatch';
 
 @Component({
   selector: 'app-welcome',
@@ -32,6 +34,19 @@ export class WelcomeComponent implements OnInit {
   public search: AccommodationSearchDTO = new AccommodationSearchDTO();
   public createReservationDTO: CreateReservationDTO = new CreateReservationDTO();
   public filter: filterDTO=new filterDTO();
+
+  priceForm = new FormGroup({
+    minPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
+    maxPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
+    
+  })
+
+  get minPrice(){
+    return this.priceForm.get('minPrice');
+  }
+  get maxPrice(){
+    return this.priceForm.get('maxPrice');
+  }
 
   constructor(private router: Router, private accommodationService: AccommodationService, private authService: AuthService) { }
 
@@ -118,6 +133,14 @@ export class WelcomeComponent implements OnInit {
     Amens=Amens.substring(0,Amens.length-1);
     this.filter=new filterDTO(this.search);
     this.filter.amenities=Amens.toString();
+
+    let minPrice = this.priceForm.get("minPrice")?.value
+    let maxPrice = this.priceForm.get("maxPrice")?.value
+    this.filter.minGrade = Number(minPrice);
+    this.filter.maxGrade = Number(maxPrice);
+
+    console.log(this.filter)
+
     this.accommodationService.filterAccommodation(this.filter).subscribe(res =>{
       this.accommodations = res;
       this.dataSource.data = res;}

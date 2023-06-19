@@ -107,13 +107,45 @@
           <td>{{ n.name }}</td>
         </tr>
         <tr>
+            <th> Price Range </th>
+            <td>
+            
+                <div class="form">
+                    <form [formGroup]="priceForm">
+        
+                        <div class="inputfield">
+                            <label for="minPrice">minPrice:</label>
+                            <input type="text" name="minPrice" formControlName="minPrice" class="input">
+                        </div>
+                        <div class="inputfield">
+                            <label></label>
+                            <span style="color: red; font-size: medium; font: bold;" *ngIf="minPrice && minPrice.invalid && minPrice.touched"> This number is invalid! </span>
+                        </div>
+        
+                        <div class="inputfield">
+                            <label for="maxPrice">maxPrice:</label>
+                            <input type="text" name="maxPrice" formControlName="maxPrice" class="input">
+                        </div>
+                        <div class="inputfield">
+                            <label></label>
+                            <span style="color: red; font-size: medium; font: bold;" *ngIf="maxPrice && maxPrice.invalid && maxPrice.touched"> This number is invalid! </span>
+                        </div>
+                    </form>
+                  
+                </div>
+            </td>
+        </tr>
+        <tr>
           <td></td>
           <td>
           <button class="btn"  (click)="filterSearch()">filter</button>
           </td>
         </tr>
+        
         </tbody>
       </table>
+
+        
 
     </div>
 
