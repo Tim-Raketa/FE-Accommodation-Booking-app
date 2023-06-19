@@ -37,7 +37,7 @@ export class GraderService {
   }
 
   getProminentStatus(hostId: number): Observable<Boolean>{
-    return this.http.get<Boolean>(this.route + '/users/prominent-host/' + hostId, {headers: this.headers});
+    return this.http.get<Boolean>(this.route + 'users/prominent-host/' + hostId, {headers: this.headers});
   }
 
   getUser(username: string): Observable<registerUserDTO>{

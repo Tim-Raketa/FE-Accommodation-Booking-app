@@ -199,3 +199,9 @@
       flex-direction: row;
     }
   }
+
+  .table{
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; 
+  }
