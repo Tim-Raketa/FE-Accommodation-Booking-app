@@ -37,6 +37,8 @@ export class WelcomeComponent implements OnInit {
   public filter: filterDTO=new filterDTO();
   public prominent:Boolean=false;
 
+  public isCheckedProminent: any
+
   priceForm = new FormGroup({
     minPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
     maxPrice: new FormControl('', [Validators.required, Validators.pattern('[0-9]+$')]),
@@ -55,6 +57,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     this.selected = 1;
     this.userRole = localStorage.getItem("role")??'';
+    this.isCheckedProminent = false;
   }
 
   searchAccomodations(){
@@ -126,6 +129,10 @@ export class WelcomeComponent implements OnInit {
 
   }
 
+  checkValue(event: any){
+    this.isCheckedProminent = event;
+ }
+
   filterSearch() {
     var Amens:String="";
     for(var bonus of this.amenities){
@@ -140,6 +147,7 @@ export class WelcomeComponent implements OnInit {
     let maxPrice = this.priceForm.get("maxPrice")?.value
     this.filter.minGrade = Number(minPrice);
     this.filter.maxGrade = Number(maxPrice);
+    this.filter.onlyHighlighted = this.isCheckedProminent;
 
 
     //
@@ -149,7 +157,7 @@ export class WelcomeComponent implements OnInit {
       this.accommodations = res;
       let potential:welcomeAccommodationDTO[]=[]
       let any:any;
-      if(this.prominent){
+      if(this.filter.onlyHighlighted){
         this.accommodations.filter(accommodation=>this.accommodationService.getAccommodationById(accommodation.accommodationId)
           .subscribe(res=>{
               any=res;
