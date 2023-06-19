@@ -100,6 +100,6 @@ export class AccommodationService {
   }
 
   getById(resservationId: number): Observable<ReservationIdsDTO> {
-    return this.http.get<ReservationIdsDTO>(this.route + 'reservations/=' + resservationId , {headers: this.headers});
+    return this.http.get<ReservationIdsDTO>(this.route + 'reservations/' + resservationId , {headers: this.headers});
   }
 }

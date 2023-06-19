@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AuthInterception } from './modules/pages/login/auth.interceptor';
 import { GuestFlightComponent } from './modules/pages/guest-flight/guest-flight.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { GuestFlightComponent } from './modules/pages/guest-flight/guest-flight.
     PagesModule,
     MatTableModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

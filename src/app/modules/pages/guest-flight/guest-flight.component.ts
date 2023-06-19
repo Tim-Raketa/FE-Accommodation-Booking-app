@@ -7,6 +7,10 @@ import {UserEditService} from "../user-edit/user-edit.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {PendingReservations} from "../../model/pendingReservations";
 import {FlightDTO} from "../../model/FlightDTO";
+import {FlightsService} from "../../services/flights.service";
+import {FlightSearchDTO} from "../../model/FlightSearchDTO";
+import {newTicketDTO} from "../../model/NewTicketDTO";
+import {tick} from "@angular/core/testing";
 
 @Component({
   selector: 'app-guest-flight',
@@ -14,10 +18,10 @@ import {FlightDTO} from "../../model/FlightDTO";
   styleUrls: ['./guest-flight.component.css']
 })
 export class GuestFlightComponent {
-  constructor(private router: Router, private route: ActivatedRoute,private accommodationService: AccommodationService, private authService : AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute,private flightService:FlightsService,private accommodationService: AccommodationService, private authService : AuthService) { }
 
   public dataSource = new MatTableDataSource<FlightDTO>();
-  public displayedColumns = ['date','destination', 'startingLocation', 'totalPrice'];
+  public displayedColumns = ['dateTime','destination', 'startingLocation', 'totalPrice','ticket'];
 
   resservationId: any;
   resservation:ReservationIdsDTO=new ReservationIdsDTO();
@@ -43,4 +47,58 @@ export class GuestFlightComponent {
 
 
 
+  FindForStarting() {
+    let search = new FlightSearchDTO()
+    search.startingLocation=this.StartingLocation;
+    search.date=this.resservation.startDate;
+    search.destination=this.resservation.accommodationLocation;
+    search.numberOfPeople=this.resservation.numberOfGuests;
+    this.flightService.searchFlights(search).subscribe(res=>
+    this.dataSource.data=res);
+  }
+  FindForEnding() {
+    let search = new FlightSearchDTO()
+    search.startingLocation=this.resservation.accommodationLocation;
+    search.date=this.resservation.endDate;
+    search.destination=this.EndingLocation;
+    search.numberOfPeople=this.resservation.numberOfGuests;
+    this.flightService.searchFlights(search).subscribe(res=>
+      this.dataSource.data=res);
+  }
+  buyTicket(id:number){
+    this.flightService.exists(this.resservation.username).subscribe(res=>{
+      if(!res) alert("you don't have an account on the flight website")
+      else {
+        let ticket=new newTicketDTO();
+        ticket.flightId=id;
+        ticket.email=this.resservation.username;
+        ticket.numberOfPeople=this.resservation.numberOfGuests;
+        this.flightService.newTicket(ticket).subscribe(res=>{
+        if(res) alert("made a ticket")
+          else alert("123")
+        })
+      }
+    }
+    )
+  }
+  editProfile =  () => {
+    this.router.navigateByUrl('/edit');
+  };
+
+  logout() {
+    this.authService.logout();
+  }
+  showGrades() {
+    this.router.navigateByUrl('/guest/grades');
+  }
+  welcome =  () => {
+    this.router.navigateByUrl('/welcome');
+  };
+
+  pendingReservations =  () => {
+    this.router.navigateByUrl('/reservations');
+  };
+  visited(){
+    this.router.navigateByUrl('/visited');
+  };
 }
