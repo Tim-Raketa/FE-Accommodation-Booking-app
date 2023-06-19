@@ -44,6 +44,7 @@ export class AccommodationService {
     return this.http.get<ReservationIdsDTO[]>(this.route + 'reservations/pending/username=' + username , {headers: this.headers});
   }
 
+
   getAccommodationsByHostId(hostId: string): Observable<AccommodationDTO[]>{
     return this.http.get<AccommodationDTO[]>(this.route + 'accommodations/host/' + hostId, {headers: this.headers});
   }
@@ -98,4 +99,7 @@ export class AccommodationService {
     return this.http.get<AccommodationDTO[]>(this.route + 'reservations/hasVisited/'+ username, {headers: this.headers});
   }
 
+  getById(resservationId: number): Observable<ReservationIdsDTO> {
+    return this.http.get<ReservationIdsDTO>(this.route + 'reservations/=' + resservationId , {headers: this.headers});
+  }
 }

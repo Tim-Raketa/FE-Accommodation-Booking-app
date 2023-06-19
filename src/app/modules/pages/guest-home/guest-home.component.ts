@@ -18,7 +18,7 @@ export class GuestHomeComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<ReservationIdsDTO>();
   public displayedColumns = ['name', 'location', 'numOfGuests',
-    'startTime','endTime', "delete"];
+    'startTime','endTime', "delete",'flights'];
   public reservations: ReservationIdsDTO[] = [];
   private stompClient: any;
 
@@ -107,5 +107,8 @@ export class GuestHomeComponent implements OnInit {
         alert("Cannot cancel this reservation.")
       }
      })
+  }
+  flights(flight:ReservationIdsDTO){
+    this.router.navigateByUrl('guest/flights/'+flight.id)
   }
 }
